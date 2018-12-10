@@ -1,0 +1,950 @@
+{
+  "description": "morals",
+  "morals": [
+    {
+      "moral": "Do not let anything turn you from your purpose.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Foolish curiosity and vanity often lead to misfortune.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Do not tell others how to act unless you can set a good example.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Do not attempt the impossible.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Those who try to deceive may expect to be paid in their own coin.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "It is one thing to say that something should be done, but quite a different matter to do it.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Do not let your vanity make you overestimate your powers.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Do not attempt too much at once.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Self help is the best help.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Heaven helps those who help themselves.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Do not say anything at any time that you would not say at all times.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Poverty with security is better than plenty in the midst of fear and uncertainty.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "There are many who pretend to despise and belittle that which is beyond their reach.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "In unity is strength.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Expect no reward for serving the wicked.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "They who will not listen to reason but stubbornly go their own way against the friendly advice of those who are wiser than they, are on the road to misfortune.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "They complain most who suffer least.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "A kindness is never wasted.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "We are often of greater importance in our own eyes than in the eyes of our neighbor.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Our best blessings are often the least appreciated.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "You are judged by the company you keep.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "It is easy to be brave when there is no danger.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "We cannot expect any one to share our misfortunes unless we are willing to share our good fortune also.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Do not resent the remarks of a fool. Ignore them.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Be sure you can better your condition before you seek to change.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Flattery is not a proof of true admiration.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Do not let flattery throw you off your guard against an enemy.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Do not let your fancy make you forget realities.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Better to yield when it is folly to resist, than to resist stubbornly and be destroyed.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "A resemblance to the great in some things does not make us great.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "Always stop to think whether your fun may not be the cause of another's unhappiness.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "In a pinch a good use of our wits may help us out.",
+      "story": [
+        "",
+        ""
+      ]
+    },
+    {
+      "moral": "There's a time for work and a time for play.",
+      "story": [
+        "",
+        ""
+      ]
+    },  {
+        "moral": "A change of habits will not alter nature.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "The same measures will not suit all circumstances.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "The least of our enemies is often the most to be feared.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Pride over a success should not throw us off our guard.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Deeds count, not boasting words.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Do not try to ape your betters.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Preparedness for war is the best guarantee of peace.
+",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Traitors may expect treachery.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "The deceitful have no friends.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Those who have all the toil do not always get the profit.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "The tyrant can always find an excuse for his tyranny.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "The unjust will not listen to the reasoning of the innocent.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "A knave's hypocrisy is easily seen through.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Do not let your hopes carry you away from reality.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "What is evil won is evil lost.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "We often make much of the ornamental and despise the useful.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Do not sacrifice your freedom for the sake of pomp and show.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Greatness has its penalties.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Take what you can get when you can get it.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Familiarity breeds contempt.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Acquaintance with evil blinds us to its dangers.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "The loud-mouthed boaster does not impress nor frighten those who know him.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Do not stop to argue with temptation.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Borrowed feathers do not make fine birds.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "One falsehood leads to another.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Stick to your trade.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "The flatterer seeks some benefit at your expense.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "It is easy and also contemptible to kick a man that is down.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Do not try to do impossible things.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "The strong are apt to settle questions to their own advantage.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "It is wiser to bear a single injury in silence than to provoke a thousand by flying into a rage.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "A fine coat is not always an indication of an attractive mind.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Do not be too hard to suit or you may have to be content with the worst or with nothing at all.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "The trickster is easily tricked.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Do not grudge others what you cannot enjoy yourself.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "An invitation prompted by selfishness is not to be accepted.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "The laws of nature are unchangeable.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Be sure of your pedigree before you boast of it.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Look before you leap.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Do not trust alone to outward appearances.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Once a wolf, always a wolf.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "The useful is of much more importance and value, than the ornamental.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Bluff and threatening words are of little value with rascals.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Bluff is no proof that hard fists are lacking.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Industry is itself a treasure.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Equals make the best friends.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Those who have plenty want more and so lose all they have.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "When the great fall out, the weak must suffer for it.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Greediness leads to misfortune.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Learn from my fate not to take pity on a scoundrel.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Good will is worth nothing unless it is accompanied by good acts.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "It is unwise to treat old friends badly for the sake of new ones.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "One swallow does not make a summer.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Be wise and shun the quack.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Act in haste and repent at leisure - and often in pain.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Take care of the little things and the big things will take care of themselves.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "In unity is strength.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Honesty is the best policy.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Those who seek to harm others often come to harm themselves through their own deceit.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Be content with your lot.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "An act of kindness is well repaid.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "The evil doer often comes to harm through his own deceit.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "It is wicked to take advantage of another's distress.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "A fine coat is not always an indication of an attractive mind.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Even the weakest may find means to avenge a wrong.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Take warning from the misfortunes of others.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "It all depends on the point of view, and who tells the story.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Do not count your chickens before they are hatched.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Wicked deeds will not stay hid.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "A possession is worth no more than the use we make of it.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "There is nothing worth so much as liberty.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Set your sails with the wind.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Those who would mend others, should first mend themselves.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Notoriety is not fame.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Do not expect constancy in others if you have none yourself.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Common sense is always worth more than cunning.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Whatever you do, do with all your might.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Misfortune is the test of true friendship.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Give a finger and lose a hand.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "The true leader proves himself by his qualities.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Do not believe everything you hear.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Everything is fair in love.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Two blacks do not make a white.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "The weak are made to suffer for the misdeeds of the powerful.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "It is very foolish to be greedy.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "The race is not always to the swift.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Ability proves itself by deeds.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Self-help is the best help.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "The wise do not let themselves be tricked a second time.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "In quarreling about the shadow we often lose the substance.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "If you try to please all, you please none.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "A kindness is never wasted.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Two sureties are better than one.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Friends in fine weather only, are not worth much.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Mother love is blind.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Learn from the misfortunes of others.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Might makes right.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Your enemies will seize any excuse to attack you.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Do not give up friends for foes.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "The wicked deserve no aid.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "A small gain is worth more than a large promise.",
+        "story": [
+          "",
+          ""
+        ]
+      },
+      {
+        "moral": "Pride goes before a fall.",
+        "story": [
+          "",
+          ""
+        ]
+      }
+  ]
+}
