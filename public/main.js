@@ -44,6 +44,9 @@ let previous_pen = 'down';
 let x, y;
 let startX = 300;
 let startY = 200;
+
+let startBookX = 200;
+let startBookY = 200;
 let sketch;
 
 
@@ -149,10 +152,12 @@ function modelReady() {
 function init() {
   //getSpeech(); //for speech enable this
   loadJsonfile();
+  setTimeout(() => {
+    loadBookSketch('book');
+  }, 1000);
+
 
 }
-
-
 
 function loadJsonfile(){
   console.log("loadjson");
@@ -180,11 +185,12 @@ function runjsonCheck(json, checkword){
   //reset a sentance container that will hold all sentances related to the search
   sentanceContainer = [];
 
-  //rin through all the sentences in the json file.
+  //run through all the sentences in the json file.
   for (var key in json.stories) {
-
-    for (var i = 0; i < json.stories[key].story.length; i++) {
-
+      // json.stories[key].story.length
+      //run over 4 sentences
+    for (var i = 0; i < Math.ceil(json.stories[key].story.length/3); i++) {
+      console.log(json.stories[key].story.length);
       //convert line to lower case
       let lineInStory = json.stories[key].story[i];
       lineInStory = lineInStory.toLowerCase();
@@ -209,13 +215,13 @@ function runjsonCheck(json, checkword){
   // add the sketch to the page
   window.setTimeout(() => {
     loadASketch(checkword);
-  }, 600);
+  }, 1000);
 }
 
 
 
 
-function addSentence(result, source){
+function addSentence(result, source, sketchIllustration){
 
   console.log("sentanceNumber1", sentanceNumber);
 
@@ -248,12 +254,10 @@ function addSentence(result, source){
       document.getElementById("story").appendChild(div).appendChild(para);
 
       let fadeinElement = document.getElementById(`paragraph${sentanceNumber}`);
-      console.log("adding Content!");
+      console.log("adding Content! after this should come currIllustration");
 
       let elm  = document.getElementById(`paragraph${sentanceNumber}`);
       elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-
 
       // let dimThis  = document.getElementById(`paragraph${sentanceNumber-1}`);
       // dimElement(dimThis);
@@ -262,6 +266,12 @@ function addSentence(result, source){
       window.setTimeout(() => {
         fadein(fadeinElement);
       }, 1200);
+
+      if (sketchIllustration!= null){
+        console.log("add illustration here");
+      } else {
+        console.log('dont add illustration here');
+      }
     }
   } else {
     console.log("the end!")
@@ -287,6 +297,8 @@ function addSentence(result, source){
       fadein(fadeinElement);
     }, 1200);
   }
+
+  console.log('sentanceNumber', sentanceNumber);
 }
 
 
@@ -302,30 +314,48 @@ function buttonPressed(clicked_id){
   runjsonCheck(fablesJson, animalOneLower);
 
   window.setTimeout(() => {
-    let fadeoutComponent = document.getElementById("characterOne");
-    fadeout(fadeoutComponent);
-  }, 500);
+    let fadeoutComponent1 = document.getElementById("characterOne");
+    let fadeoutComponent2 = document.getElementById("recordedText");
+
+    fadeout(fadeoutComponent1);
+    fadeout(fadeoutComponent2);
+  }, 300);
+
+  let para = document.createElement("p");
+  let node = document.createTextNode(`A story about a ${animalOne}`);
+  para.appendChild(node);
+  para.style.display = "none";
+  para.classList.add("title-text-name");
+  para.id = "a-story-about";
+  var element = document.getElementById("prompt");
+  element.appendChild(para);
+
+
+  window.setTimeout(() => {
+    fadeInelement = document.getElementById("a-story-about");
+    fadein(fadeInelement);
+  }, 1000);
+
+
 }
 
 
 function startbuttonPressed(clicked_id){
 
-console.log("hello!");
-window.setTimeout(() => {
-  let fadeoutComponent = document.getElementById("start-button");
-  fadeout(fadeoutComponent);
-}, 500);
+  window.setTimeout(() => {
+    let fadeoutComponent = document.getElementById("start-button");
+    fadeout(fadeoutComponent);
 
-window.setTimeout(() => {
-  let fadeinComponent1 = document.getElementById("prompt");
-  let fadeinComponent2 = document.getElementById("characterOne");
+    let fadeoutComponent1 = document.getElementById("book");
+    fadeout(fadeoutComponent1);
+  }, 500);
 
-  fadein(fadeinComponent1);
-  fadein(fadeinComponent2);
-
-
-}, 1000);
-
+  window.setTimeout(() => {
+    let fadeinComponent1 = document.getElementById("prompt");
+    let fadeinComponent2 = document.getElementById("characterOne");
+    fadein(fadeinComponent1);
+    fadein(fadeinComponent2);
+  }, 1000);
 
 
 }
@@ -335,7 +365,7 @@ window.setTimeout(() => {
 
 ///////sketchrnn
 
-
+//drawing class
 var sketchRnnDrawing = function( drawingOne ) {
   // var x = 100;
   // var y = 100;
@@ -379,8 +409,10 @@ var sketchRnnDrawing = function( drawingOne ) {
 };
 
 
-function loadASketch(drawing){
 
+
+
+function loadASketch(drawing){
   sketchmodel = ml5.SketchRNN(drawing, function() {
     // console.log("sketchmodelReady");
     startDrawing();
@@ -394,7 +426,7 @@ function loadASketch(drawing){
   div.id = `drawing${sentanceNumber}`;
   div.style.background = "white";
   div.style.color = "white";
-  div.style.paddingBottom = "25px";
+  div.style.paddingBottom = "0px";
   document.getElementById("story").appendChild(div);
 
   var drawingCanvas = new p5(sketchRnnDrawing, document.getElementById(`drawing${sentanceNumber}`));
@@ -407,6 +439,89 @@ function loadASketch(drawing){
   }
 }
 
+
+
+
+//book animation
+function loadBookSketch(drawing){
+
+  sketchbookmodel = ml5.SketchRNN(drawing, function() {
+    // console.log("sketchmodelReady");
+    startDrawingbook();
+  });
+
+  //create a div container for drawing
+
+  // drawingNumber ++;
+
+  var div = document.createElement("div");
+  div.id = "bookillustration";
+  div.style.background = "white";
+  div.style.color = "white";
+  div.style.paddingBottom = "0px";
+  document.getElementById("book").appendChild(div);
+
+
+  var drawingBookCanvas = new p5(sketchRnnBook, document.getElementById("bookillustration"));
+}
+
+
+//  Book animation in beginning
+
+function startDrawingbook() {
+  x = startBookX ;
+  y = startBookY;
+
+  sketchbookmodel.reset();
+  sketchbookmodel.generate(gotSketch);
+  previous_pen = 'down';
+}
+
+
+// book class
+var sketchRnnBook = function( drawingBook ) {
+  // var x = 100;
+  // var y = 100;
+
+  drawingBook.setup = function() {
+    drawingBook.createCanvas(600, 400);
+    drawingBook.background(255);
+    previous_pen = 'down';
+    drawingBook.loop();
+    sketchColor = getRandomColor();
+  };
+
+  drawingBook.draw = function() {
+    if (sketch) {
+      if (previous_pen == 'down') {
+        drawingBook.stroke(sketchColor);
+        drawingBook.strokeWeight(3);
+        drawingBook.line(x, y, x + sketch.dx/3, y + sketch.dy/3);
+      }
+      x += sketch.dx/3;
+      y += sketch.dy/3;
+      previous_pen = sketch.pen;
+
+      if (sketch.pen !== 'end') {
+        sketch = null;
+        sketchbookmodel.generate(gotSketch);
+      } else {
+
+        drawingBook.noLoop();
+        previous_pen = sketch.pen;
+        sketch = null;
+        sketchbookmodel = null;
+
+        //draw another ones
+
+
+      }
+    }
+  };
+};
+
+
+
 function startDrawing() {
   x = startX ;
   y = startY;
@@ -415,6 +530,8 @@ function startDrawing() {
   sketchmodel.generate(gotSketch);
   previous_pen = 'down';
 }
+
+
 
 function gotSketch(err, s) {
   sketch = s;

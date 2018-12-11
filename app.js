@@ -4,6 +4,7 @@ var path = require("path");
 var io = require('socket.io');
 var bodyParser = require('body-parser')
 var express = require('express');
+var Sentiment = require('sentiment');
 
 //require the word2vec class
 var Word2Vec = require('./sentence2vec.js')
@@ -17,7 +18,7 @@ var userID = 0;
 
 // console.log(embedings[0].message);
 
-// console.log("average", Word2Vec.average(embedings[0].message_embedding, embedings[1].message_embedding));
+// console.log("average", Word2Vec.average(embedings[20].message_embedding, embedings[30].message_embedding));
 // console.log("distance", Word2Vec.distance(embedings[0].message_embedding, embedings[1].message_embedding));
 
 
@@ -85,7 +86,7 @@ sockets.on('connection', function(socket){
 
 
   socket.on('sendSeedSentance', function(data){
-    // console.log(data.randomSentance)
+    console.log(data.randomSentance)
     let seedSentance = data.randomSentance;
     findVector(seedSentance);
   });
@@ -95,15 +96,24 @@ sockets.on('connection', function(socket){
 ////// end socket work/////
 
 
+//TODO
+function findAverageVector(){
+
+  // Word2Vec.average(embedings[20].message_embedding, embedings[30].message_embedding));
+}
+
+
 
 function findVector(sentance, n = 10){
   let vec;
   let sentencesResults = [];
+
   for(let i = 0; i < Object.keys(embedings).length; i++){
     if(embedings[i].message === sentance){
       vec = embedings[i].message_embedding;
     }
   }
+
   let sentences = [];
   let keys = Object.keys(embedings);
   for (let i = 0; i < keys.length; i++) {
@@ -111,6 +121,8 @@ function findVector(sentance, n = 10){
     let d = Word2Vec.distance(vec, embedings[key].message_embedding);
     sentences.push({wordKey: key, distance: d});
   }
+
+  //sort results
   sentences.sort((a, b) => {
     return b.distance - a.distance;
   });
@@ -119,7 +131,6 @@ function findVector(sentance, n = 10){
   let closeset = sentences.slice(0, n);
 
   //fetch sentences from json
-
   let closestKeys = Object.keys(closeset);
   for (let i = 0; i < closestKeys.length; i++) {
     // console.log(closestKeys);
@@ -128,6 +139,20 @@ function findVector(sentance, n = 10){
   }
   // console.log(sentencesResults);
   sockets.emit('sentencesResults', sentencesResults);
+
+
+  let sentimentResults = [];
+
+  for (var i = 0; i < sentencesResults.length; i++) {
+    let sentiment = new Sentiment();
+    let result = sentiment.analyze(sentencesResults[i]);
+    // console.log(result);    // Score: -2, Comparative: -0.666
+    
+
+    sentimentResults.push(result.score);
+
+  }
+  console.log(sentimentResults);
 
 }
 

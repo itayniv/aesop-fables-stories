@@ -308,6 +308,11 @@
     background-color: 'white';
   }
 
+.book-div{
+  "text-align: center;"
+  width: 300px;
+  height: 400px;
+}
   .button {
     z-index:100;
     margin-top: 20px;
@@ -323,6 +328,15 @@
 
   .title-text{
     font-size: 20px;
+    font-family: 'Sumana', serif;
+
+    /* font-family: 'Short Stack', cursive; */
+
+  }
+
+  .title-text-name{
+    font-size: 20px;
+    color: #b5b0b6;
     font-family: 'Sumana', serif;
 
     /* font-family: 'Short Stack', cursive; */
@@ -594,6 +608,38 @@
     padding: 0 40px;
     background: #f3f3f3;
     border: none;
+  }
+
+  .start-button {
+
+    z-index:100;
+    width: 40%;
+    margin-top: 20px;
+    line-height: 60px;
+    font-size: 20px;
+    font-family: 'Sumana', serif;
+    color: #606060;
+    /* font-family: 'Short Stack', cursive; */
+    background: none;
+    border: none;
+    border: 2px solid #868686;
+
+  }
+  .start-button:hover {
+
+    z-index:100;
+    width: 40%;
+    margin-top: 20px;
+    line-height: 60px;
+    font-size: 20px;
+    font-family: 'Sumana', serif;
+    color: #606060;
+    /* font-family: 'Short Stack', cursive; */
+    background: none;
+    border: none;
+    border: 2px solid #868686;
+    text-decoration: underline;
+
   }
 
 
