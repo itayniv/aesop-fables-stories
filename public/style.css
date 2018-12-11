@@ -15,10 +15,12 @@
   .voice {
     padding-top: 40px;
     padding-bottom: 40px;
-    font-family: 'Short Stack', cursive;
+    font-family: 'Sumana', serif;
+
+    /* font-family: 'Short Stack', cursive; */
     color: #15235a;
     font-size: 30px;
-    line-height: 40px;
+    line-height: 50px;
   }
 
   .generate-button {
@@ -310,16 +312,20 @@
     z-index:100;
     margin-top: 20px;
     line-height: 60px;
-    font-size: 12px;
-    font-family: 'Short Stack', cursive;
+    font-size: 20px;
+    font-family: 'Sumana', serif;
+    color: #606060;
+    /* font-family: 'Short Stack', cursive; */
     padding: 0 5%;
     background: #f3f3f3;
     border: none;
   }
 
   .title-text{
-    font-size: 16px;
-    font-family: 'Short Stack', cursive;
+    font-size: 20px;
+    font-family: 'Sumana', serif;
+
+    /* font-family: 'Short Stack', cursive; */
 
   }
 

@@ -199,6 +199,7 @@ function runjsonCheck(json, checkword){
 
   // pick a randon sentance from that array.
   let randomSentance = Math.floor(Math.random() * Math.floor(sentanceContainer.length));
+
   socket.emit('sendSeedSentance', {'animal': checkword, 'randomSentance': sentanceContainer[randomSentance]});
 
   // add the sentance to the page
@@ -254,8 +255,8 @@ function addSentence(result, source){
 
 
 
-      let dimThis  = document.getElementById(`paragraph${sentanceNumber-1}`);
-      dimElement(dimThis);
+      // let dimThis  = document.getElementById(`paragraph${sentanceNumber-1}`);
+      // dimElement(dimThis);
 
       // add the sketch to the page after a second
       window.setTimeout(() => {
@@ -307,6 +308,31 @@ function buttonPressed(clicked_id){
 }
 
 
+function startbuttonPressed(clicked_id){
+
+console.log("hello!");
+window.setTimeout(() => {
+  let fadeoutComponent = document.getElementById("start-button");
+  fadeout(fadeoutComponent);
+}, 500);
+
+window.setTimeout(() => {
+  let fadeinComponent1 = document.getElementById("prompt");
+  let fadeinComponent2 = document.getElementById("characterOne");
+
+  fadein(fadeinComponent1);
+  fadein(fadeinComponent2);
+
+
+}, 1000);
+
+
+
+}
+
+
+
+
 ///////sketchrnn
 
 
@@ -341,7 +367,7 @@ var sketchRnnDrawing = function( drawingOne ) {
         window.setTimeout(() => {
           console.log("add new sentance");
           enhanceStory(sentanceNumber);
-        }, 3000);
+        }, 7000);
 
         drawingOne.noLoop();
         previous_pen = sketch.pen;
@@ -376,10 +402,8 @@ function loadASketch(drawing){
     let elm  = document.getElementById(`drawing${sentanceNumber}`);
     elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-
-
-    let dimThis  = document.getElementById(`paragraph${sentanceNumber-1}`);
-    dimElement(dimThis);
+    // let dimThis  = document.getElementById(`paragraph${sentanceNumber-1}`);
+    // dimElement(dimThis);
   }
 }
 
@@ -396,6 +420,10 @@ function gotSketch(err, s) {
   sketch = s;
 }
 
+
+
+
+
 function enhanceStory(){
   //check if lower than length
   if(sentanceNumber <= 10){
@@ -406,7 +434,7 @@ function enhanceStory(){
     console.log("add new sentance");
     window.setTimeout(() => {
       ifInClass(similarSentences[sentanceNumber]);
-    }, 7000);
+    }, 9000);
   }
 }
 
@@ -443,10 +471,8 @@ function ifInClass(theSentance){
       let elm  = document.getElementById(`paragraph${sentanceNumber}`);
       elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-
-      //
-      let dimThis  = document.getElementById(`paragraph${sentanceNumber-1}`);
-      dimElement(dimThis);
+      // let dimThis  = document.getElementById(`paragraph${sentanceNumber-1}`);
+      // dimElement(dimThis);
 
       //trigger the loop
       window.setTimeout(() => {
