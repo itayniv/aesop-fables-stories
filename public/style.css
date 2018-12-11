@@ -1,19 +1,24 @@
 @media screen and (min-width: 300px) {
 
-
-
-
-
-
   .net {
     font-family: 'Roboto', sans-serif;
     color: blue;
+    font-size: 20px;
+
+  }
+
+
+  .html {
+    scroll-behavior: smooth;
   }
 
   .voice {
     padding-top: 40px;
+    padding-bottom: 40px;
     font-family: 'Short Stack', cursive;
-    color: grey;
+    color: #15235a;
+    font-size: 30px;
+    line-height: 40px;
   }
 
   .generate-button {
@@ -307,7 +312,7 @@
     line-height: 60px;
     font-size: 12px;
     font-family: 'Short Stack', cursive;
-    padding: 0 40px;
+    padding: 0 5%;
     background: #f3f3f3;
     border: none;
   }

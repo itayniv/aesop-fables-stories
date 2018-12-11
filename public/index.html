@@ -36,36 +36,31 @@
 <body>
 
   <div class="container">
-    <div class="row">
-      <div class="col-sm-2">
-        <div id="illustrations" class="generate-button">
-          <button id="draw" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" >
-            🎨
-          </button>
-        </div>
+    <div class="row" style="padding-bottom: 1000px;">
+      <div class="col-sm-3">
       </div>
-      <div class="col-sm-2">
-      </div>
-
       <div class="col-sm-6">
         <div id="prompt">
           <p id="recordedText" class="title-text">Tell me a story about a...</p>
         </div>
+        <div id="characterOne">
+          <button id="button-Lion" class="button" onclick="buttonPressed(this.id)">Lion</button>
+          <button id="button-Cat" class="button" onclick="buttonPressed(this.id)">Cat</button>
+          <button id="button-Owl" class="button" onclick="buttonPressed(this.id)">Owl</button>
+          <button id="button-Spider" class="button" onclick="buttonPressed(this.id)">spider</button>
+          <button id="button-bird" class="button" onclick="buttonPressed(this.id)">Bird</button>
+          <button id="button-sheep" class="button" onclick="buttonPressed(this.id)">Sheep</button>
 
-        <button id="button-lion" class="button" onclick="buttonPressed(this.id)">lion</button>
-        <button id="button-fox" class="button" onclick="buttonPressed(this.id)">Fox</button>
-        <button id="button-wolf" class="button" onclick="buttonPressed(this.id)">Wolf</button>
-        <button id="button-frog" class="button" onclick="buttonPressed(this.id)">Frog</button>
-        <button id="button-bird" class="button" onclick="buttonPressed(this.id)">Bird</button>
-
+        </div>
         <div id="story">
           <p id="recordedText"></p>
         </div>
 
         <div id="Illustration01">
-          
+
+
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
         </div>
       </div>
     </div>

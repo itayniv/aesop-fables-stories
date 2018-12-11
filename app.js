@@ -77,7 +77,7 @@ var sockets = io(server);
 sockets.on('connection', function(socket){
 
   // send current state to this client that connected only
-  console.log(`a user connected`,socket.id);
+  // console.log(`a user connected`,socket.id);
   //
   //
   //
@@ -85,24 +85,18 @@ sockets.on('connection', function(socket){
 
 
   socket.on('sendSeedSentance', function(data){
-    console.log(data.randomSentance)
-
+    // console.log(data.randomSentance)
     let seedSentance = data.randomSentance;
     findVector(seedSentance);
   });
 
-
-  // //console.log('a user connected',socket.id);
-  // socket.on('ClientReset', function(resetfromclient){
-  //
-  // });
 });
 
 ////// end socket work/////
 
 
 
-function findVector(sentance, n = 20){
+function findVector(sentance, n = 10){
   let vec;
   let sentencesResults = [];
   for(let i = 0; i < Object.keys(embedings).length; i++){
@@ -138,4 +132,4 @@ function findVector(sentance, n = 20){
 }
 
 //run a similarity check
-// findVector(embedings[954].message);
+// findVector(embedings[900].message);
