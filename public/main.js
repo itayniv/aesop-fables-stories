@@ -551,6 +551,7 @@ var sketchRnnBook = function( drawingBook ) {
         });
         //stop looping in draw
         if(startStory){
+          sketch = null;
           drawingBook.noLoop();
         }
 
