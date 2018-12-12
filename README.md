@@ -8,6 +8,7 @@ I chose to focus on Aesop Fables because of their concise yet rich story lines, 
 
 
 ![Aesop Fables for kids](./images/fables.jpg)
+
 [The text](http://www.gutenberg.org/files/49010/49010-0.txt)
 
 Each original story contains:
