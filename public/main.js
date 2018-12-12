@@ -21,6 +21,7 @@ let similarSentences = [];
 let similaritiesArray = [];
 let sketchColor;
 let maxSentences = 9;
+let startStory = false;
 
 
 let lstm;
@@ -150,14 +151,13 @@ function modelReady() {
 }
 
 function init() {
-  //getSpeech(); //for speech enable this
   loadJsonfile();
   setTimeout(() => {
     loadBookSketch('book');
   }, 1000);
-
-
 }
+
+
 
 function loadJsonfile(){
   console.log("loadjson");
@@ -213,7 +213,7 @@ function runjsonCheck(json, checkword){
   addSentence(sentanceContainer[randomSentance], 'notnet');
 
   // add the sketch to the page
-  window.setTimeout(() => {
+  setTimeout(() => {
     loadASketch(checkword);
   }, 1000);
 }
@@ -263,7 +263,7 @@ function addSentence(result, source, sketchIllustration){
       // dimElement(dimThis);
 
       // add the sketch to the page after a second
-      window.setTimeout(() => {
+      setTimeout(() => {
         fadein(fadeinElement);
       }, 1200);
 
@@ -293,7 +293,7 @@ function addSentence(result, source, sketchIllustration){
 
 
     // add the sketch to the page after a second
-    window.setTimeout(() => {
+    setTimeout(() => {
       fadein(fadeinElement);
     }, 1200);
   }
@@ -313,7 +313,7 @@ function buttonPressed(clicked_id){
   //run the check function
   runjsonCheck(fablesJson, animalOneLower);
 
-  window.setTimeout(() => {
+  setTimeout(() => {
     let fadeoutComponent1 = document.getElementById("characterOne");
     let fadeoutComponent2 = document.getElementById("recordedText");
 
@@ -331,7 +331,7 @@ function buttonPressed(clicked_id){
   element.appendChild(para);
 
 
-  window.setTimeout(() => {
+  setTimeout(() => {
     fadeInelement = document.getElementById("a-story-about");
     fadein(fadeInelement);
   }, 1000);
@@ -342,15 +342,17 @@ function buttonPressed(clicked_id){
 
 function startbuttonPressed(clicked_id){
 
-  window.setTimeout(() => {
+  startStory = true;
+
+  setTimeout(() => {
     let fadeoutComponent = document.getElementById("start-button");
     fadeout(fadeoutComponent);
 
     let fadeoutComponent1 = document.getElementById("book");
-    fadeout(fadeoutComponent1);
+    fadeoutandDelete(fadeoutComponent1);
   }, 500);
 
-  window.setTimeout(() => {
+  setTimeout(() => {
     let fadeinComponent1 = document.getElementById("prompt");
     let fadeinComponent2 = document.getElementById("characterOne");
     fadein(fadeinComponent1);
@@ -475,6 +477,7 @@ function startDrawingbook() {
   sketchbookmodel.reset();
   sketchbookmodel.generate(gotSketch);
   previous_pen = 'down';
+  console.log('startDrawingbook');
 }
 
 
@@ -506,11 +509,34 @@ var sketchRnnBook = function( drawingBook ) {
         sketch = null;
         sketchbookmodel.generate(gotSketch);
       } else {
+        console.log("end");
 
-        drawingBook.noLoop();
-        previous_pen = sketch.pen;
         sketch = null;
-        sketchbookmodel = null;
+        // sketchbookmodel = null;
+
+        let randomDrawingNumber = Math.floor(Math.random() * drawingClasses.length);
+        console.log(randomDrawingNumber);
+        let randDrawing = drawingClasses[randomDrawingNumber];
+        console.log(randDrawing);
+
+        sketchmodel = ml5.SketchRNN(randDrawing, function() {
+          console.log("sketchmodelReady");
+          startBookX = Math.floor(Math.random() * 600);
+          startBookY = Math.floor(Math.random() * 400);
+          setTimeout(() => {
+            startDrawingbook();
+          }, 2000);
+
+        });
+        //stop looping in draw
+        if(startStory){
+          drawingBook.noLoop();
+        }
+
+
+        //convert essential for stoping the animation
+        // previous_pen = sketch.pen;
+
 
         //draw another ones
 
@@ -549,7 +575,7 @@ function enhanceStory(){
     //add centance
     addSentence(similarSentences[sentanceNumber], 'sentence2Vec');
     console.log("add new sentance");
-    window.setTimeout(() => {
+    setTimeout(() => {
       ifInClass(similarSentences[sentanceNumber]);
     }, 9000);
   }
@@ -609,12 +635,27 @@ function ifInClass(theSentance){
 ///Utils
 
 
+
 function fadeout(element) {
   var op = 1;  // initial opacity
   var timer = setInterval(function () {
     if (op <= 0.001){
       clearInterval(timer);
       element.style.display = 'none';
+    }
+    element.style.opacity = op;
+    element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+    op -= op * 0.4;
+  }, 20);
+}
+
+function fadeoutandDelete(element) {
+  var op = 1;  // initial opacity
+  var timer = setInterval(function () {
+    if (op <= 0.001){
+      clearInterval(timer);
+      element.style.display = 'none';
+      element.remove();
     }
     element.style.opacity = op;
     element.style.filter = 'alpha(opacity=' + op * 100 + ")";
