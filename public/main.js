@@ -23,6 +23,9 @@ let sketchColor;
 let maxSentences = 9;
 let startStory = false;
 
+let viewportWidth;
+let viewportHeight;
+
 
 let lstm;
 let textInput;
@@ -46,8 +49,8 @@ let x, y;
 let startX = 300;
 let startY = 200;
 
-let startBookX = 200;
-let startBookY = 200;
+let startBookX;
+let startBookY;
 let sketch;
 
 
@@ -151,6 +154,16 @@ function modelReady() {
 }
 
 function init() {
+
+  viewportWidth = window.innerWidth;
+  viewportHeight = window.innerHeight;
+
+  startBookX = viewportWidth/2;
+  startBookY = viewportHeight/2;
+
+  console.log(viewportWidth,viewportHeight);
+
+
   loadJsonfile();
   setTimeout(() => {
     loadBookSketch('book');
@@ -345,19 +358,25 @@ function startbuttonPressed(clicked_id){
   startStory = true;
 
   setTimeout(() => {
+
+
+    let fadeoutComponent1 = document.getElementById("book");
+    fadeout(fadeoutComponent1);
+  }, 300);
+
+  setTimeout(() => {
     let fadeoutComponent = document.getElementById("start-button");
     fadeout(fadeoutComponent);
 
-    let fadeoutComponent1 = document.getElementById("book");
-    fadeoutandDelete(fadeoutComponent1);
-  }, 500);
+
+  }, 700);
 
   setTimeout(() => {
     let fadeinComponent1 = document.getElementById("prompt");
     let fadeinComponent2 = document.getElementById("characterOne");
     fadein(fadeinComponent1);
     fadein(fadeinComponent2);
-  }, 1000);
+  }, 1200);
 
 
 }
@@ -453,7 +472,6 @@ function loadBookSketch(drawing){
   });
 
   //create a div container for drawing
-
   // drawingNumber ++;
 
   var div = document.createElement("div");
@@ -461,8 +479,9 @@ function loadBookSketch(drawing){
   div.style.background = "white";
   div.style.color = "white";
   div.style.paddingBottom = "0px";
+  div.style.position = "absolute";
+  div.style.zIndex = "1";
   document.getElementById("book").appendChild(div);
-
 
   var drawingBookCanvas = new p5(sketchRnnBook, document.getElementById("bookillustration"));
 }
@@ -471,8 +490,8 @@ function loadBookSketch(drawing){
 //  Book animation in beginning
 
 function startDrawingbook() {
-  x = startBookX ;
-  y = startBookY;
+  x = startBookX/2;
+  y = startBookY/2;
 
   sketchbookmodel.reset();
   sketchbookmodel.generate(gotSketch);
@@ -487,7 +506,7 @@ var sketchRnnBook = function( drawingBook ) {
   // var y = 100;
 
   drawingBook.setup = function() {
-    drawingBook.createCanvas(600, 400);
+    drawingBook.createCanvas(viewportWidth, viewportHeight);
     drawingBook.background(255);
     previous_pen = 'down';
     drawingBook.loop();
@@ -499,10 +518,10 @@ var sketchRnnBook = function( drawingBook ) {
       if (previous_pen == 'down') {
         drawingBook.stroke(sketchColor);
         drawingBook.strokeWeight(3);
-        drawingBook.line(x, y, x + sketch.dx/3, y + sketch.dy/3);
+        drawingBook.line(x, y, x + sketch.dx/2, y + sketch.dy/2);
       }
-      x += sketch.dx/3;
-      y += sketch.dy/3;
+      x += sketch.dx/2;
+      y += sketch.dy/2;
       previous_pen = sketch.pen;
 
       if (sketch.pen !== 'end') {
@@ -514,18 +533,20 @@ var sketchRnnBook = function( drawingBook ) {
         sketch = null;
         // sketchbookmodel = null;
 
+        // pic random drawing class
         let randomDrawingNumber = Math.floor(Math.random() * drawingClasses.length);
-        console.log(randomDrawingNumber);
         let randDrawing = drawingClasses[randomDrawingNumber];
-        console.log(randDrawing);
+        sketchColor = getRandomColor();
 
         sketchmodel = ml5.SketchRNN(randDrawing, function() {
-          console.log("sketchmodelReady");
-          startBookX = Math.floor(Math.random() * 600);
-          startBookY = Math.floor(Math.random() * 400);
+          console.log("sketchmodelReady", randDrawing);
+          startBookX = Math.floor(Math.random() * (viewportWidth*2 -20) + 20);
+          startBookY = Math.floor(Math.random() * (viewportHeight*2 -20)+ 20);
+          console.log(startBookX,startBookY);
+
           setTimeout(() => {
             startDrawingbook();
-          }, 2000);
+          }, 1700);
 
         });
         //stop looping in draw
@@ -533,14 +554,9 @@ var sketchRnnBook = function( drawingBook ) {
           drawingBook.noLoop();
         }
 
-
         //convert essential for stoping the animation
         // previous_pen = sketch.pen;
-
-
         //draw another ones
-
-
       }
     }
   };
