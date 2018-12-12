@@ -5,11 +5,9 @@ This project is a study on Aesop Fables and the possibility of exploring the con
 # Collecting the data.
 
 I chose to focus on Aesop Fables because of their concise yet rich story lines, the use of animals as metaphors, and the strong morals embedded in each story.
-
+[The text](http://www.gutenberg.org/files/49010/49010-0.txt)
 
 ![Aesop Fables for kids](./images/fables.jpg)
-<Enter>
-[The text](http://www.gutenberg.org/files/49010/49010-0.txt)
 
 Each original story contains:
 
