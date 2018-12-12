@@ -161,7 +161,7 @@ function init() {
   startBookX = viewportWidth/2;
   startBookY = viewportHeight/2;
 
-  console.log(viewportWidth,viewportHeight);
+  // console.log(viewportWidth,viewportHeight);
 
 
   loadJsonfile();
@@ -203,7 +203,7 @@ function runjsonCheck(json, checkword){
       // json.stories[key].story.length
       //run over 4 sentences
     for (var i = 0; i < Math.ceil(json.stories[key].story.length/3); i++) {
-      console.log(json.stories[key].story.length);
+      // console.log(json.stories[key].story.length);
       //convert line to lower case
       let lineInStory = json.stories[key].story[i];
       lineInStory = lineInStory.toLowerCase();
@@ -236,10 +236,10 @@ function runjsonCheck(json, checkword){
 
 function addSentence(result, source, sketchIllustration){
 
-  console.log("sentanceNumber1", sentanceNumber);
+  // console.log("sentanceNumber1", sentanceNumber);
 
   if (sentanceNumber <= maxSentences ){
-    console.log("add a sentence");
+    // console.log("add a sentence");
 
     sentanceNumber ++;
     var div = document.createElement("div");
@@ -281,13 +281,13 @@ function addSentence(result, source, sketchIllustration){
       }, 1200);
 
       if (sketchIllustration!= null){
-        console.log("add illustration here");
+        // console.log("add illustration here");
       } else {
-        console.log('dont add illustration here');
+        // console.log('dont add illustration here');
       }
     }
   } else {
-    console.log("the end!")
+    // console.log("the end!")
 
     var div = document.createElement("div");
     div.id = `paragraph${sentanceNumber+1}`;
@@ -311,7 +311,7 @@ function addSentence(result, source, sketchIllustration){
     }, 1200);
   }
 
-  console.log('sentanceNumber', sentanceNumber);
+  // console.log('sentanceNumber', sentanceNumber);
 }
 
 
@@ -416,7 +416,7 @@ var sketchRnnDrawing = function( drawingOne ) {
       } else {
         //when finished --> add another sentence
         window.setTimeout(() => {
-          console.log("add new sentance");
+          // console.log("add new sentance");
           enhanceStory(sentanceNumber);
         }, 7000);
 
@@ -496,7 +496,7 @@ function startDrawingbook() {
   sketchbookmodel.reset();
   sketchbookmodel.generate(gotSketch);
   previous_pen = 'down';
-  console.log('startDrawingbook');
+  // console.log('startDrawingbook');
 }
 
 
@@ -528,7 +528,7 @@ var sketchRnnBook = function( drawingBook ) {
         sketch = null;
         sketchbookmodel.generate(gotSketch);
       } else {
-        console.log("end");
+        // console.log("end");
 
         sketch = null;
         // sketchbookmodel = null;
@@ -539,10 +539,10 @@ var sketchRnnBook = function( drawingBook ) {
         sketchColor = getRandomColor();
 
         sketchmodel = ml5.SketchRNN(randDrawing, function() {
-          console.log("sketchmodelReady", randDrawing);
+          // console.log("sketchmodelReady", randDrawing);
           startBookX = Math.floor(Math.random() * (viewportWidth*2 -20) + 20);
           startBookY = Math.floor(Math.random() * (viewportHeight*2 -20)+ 20);
-          console.log(startBookX,startBookY);
+          // console.log(startBookX,startBookY);
 
           setTimeout(() => {
             startDrawingbook();
@@ -590,7 +590,7 @@ function enhanceStory(){
     similaritiesArray = [];
     //add centance
     addSentence(similarSentences[sentanceNumber], 'sentence2Vec');
-    console.log("add new sentance");
+    // console.log("add new sentance");
     setTimeout(() => {
       ifInClass(similarSentences[sentanceNumber]);
     }, 9000);
@@ -607,10 +607,10 @@ function ifInClass(theSentance){
 
     for (var i = 0; i < sentenceToArray.length; i++) {
       if (drawingClasses.indexOf(sentenceToArray[i].toLowerCase()) > -1) {
-        console.log(sentenceToArray[i], "<-------is in the array!")
+        // console.log(sentenceToArray[i], "<-------is in the array!")
         similaritiesArray.push(sentenceToArray[i]);
       } else {
-        console.log("not in sentance");
+        // console.log("not in sentance");
         //Not in the array
       }
     }
@@ -635,14 +635,14 @@ function ifInClass(theSentance){
 
       //trigger the loop
       window.setTimeout(() => {
-        console.log("add new sentance");
+        // console.log("add new sentance");
         ifInClass(similarSentences[sentanceNumber]);
       }, 8000);
     }
 
   }else{
     // if it' the end trigger the end
-    console.log("TheEnd");
+    // console.log("TheEnd");
     addSentence('The End', 'EndOfStory');
   }
 }
