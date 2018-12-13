@@ -26,6 +26,7 @@ let startStory = false;
 let viewportWidth;
 let viewportHeight;
 
+let penStrokes = 0;
 
 let lstm;
 let textInput;
@@ -200,8 +201,8 @@ function runjsonCheck(json, checkword){
 
   //run through all the sentences in the json file.
   for (var key in json.stories) {
-      // json.stories[key].story.length
-      //run over 4 sentences
+    // json.stories[key].story.length
+    //run over 4 sentences
     for (var i = 0; i < Math.ceil(json.stories[key].story.length/3); i++) {
       // console.log(json.stories[key].story.length);
       //convert line to lower case
@@ -222,7 +223,6 @@ function runjsonCheck(json, checkword){
   socket.emit('sendSeedSentance', {'animal': checkword, 'randomSentance': sentanceContainer[randomSentance]});
 
   // add the sentance to the page
-
   addSentence(sentanceContainer[randomSentance], 'notnet');
 
   // add the sketch to the page
@@ -236,12 +236,12 @@ function runjsonCheck(json, checkword){
 
 function addSentence(result, source, sketchIllustration){
 
-  // console.log("sentanceNumber1", sentanceNumber);
-
+  //if the current sentence is smaller than the entire length of the story
   if (sentanceNumber <= maxSentences ){
-    // console.log("add a sentence");
-
+    //increase sentence number
     sentanceNumber ++;
+
+    //create div to hold new sentence
     var div = document.createElement("div");
     div.id = `paragraph${sentanceNumber}`;
     div.style.background = "white";
@@ -249,7 +249,7 @@ function addSentence(result, source, sketchIllustration){
     div.style.opacity = 0;
     div.style.filter = 'alpha(opacity=' + 0 * 0 + ")";
 
-    // console.log(result," " ,source);
+    //check source of the sentence
     if (source == "net"){
       // console.log("Net");
       let para = document.createElement("p");
@@ -257,37 +257,50 @@ function addSentence(result, source, sketchIllustration){
       let node = document.createTextNode(result);
       para.appendChild(node);
       document.getElementById("story").appendChild(div).appendChild(para);
-
     } else {
-      // console.log("Voice")
+
+      //if the source is not "net" than do the following
       let para = document.createElement("p");
+
+      //add class to paragraph
       para.classList.add("voice");
       let node = document.createTextNode(result);
       para.appendChild(node);
       document.getElementById("story").appendChild(div).appendChild(para);
-
-      let fadeinElement = document.getElementById(`paragraph${sentanceNumber}`);
-      console.log("adding Content! after this should come currIllustration");
-
-      let elm  = document.getElementById(`paragraph${sentanceNumber}`);
-      elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
       // let dimThis  = document.getElementById(`paragraph${sentanceNumber-1}`);
       // dimElement(dimThis);
-
-      // add the sketch to the page after a second
       setTimeout(() => {
-        fadein(fadeinElement);
-      }, 1200);
+        //scroll into the sentence
+        console.log(`Adding sentence number${sentanceNumber}`);
 
-      if (sketchIllustration!= null){
-        // console.log("add illustration here");
-      } else {
-        // console.log('dont add illustration here');
+        let elm  = document.getElementById(`paragraph${sentanceNumber}`);
+        elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        //fade the sentence into the page.
+        let fadeinElement = document.getElementById(`paragraph${sentanceNumber}`);
+        fadein(fadeinElement);
+      }, 500);
+
+      //run check to see if there is an illustration that fits here
+      let thisClass = ifInClass(result);
+      if (sentanceNumber > 1){
+        if (thisClass != undefined){
+          console.log(`add ${thisClass} illustration here`);
+          loadASketch(thisClass);
+        } else {
+          //TODO console.log('dont add illustration here');
+        }
       }
+
     }
+    //run loop again!
+    setTimeout(() => {
+      addSentence(similarSentences[sentanceNumber], 'sentence2Vec', sketchIllustration);
+    }, 10000);
+
   } else {
-    // console.log("the end!")
+
+    //if sentanceNumber is larger than the maxSentences
 
     var div = document.createElement("div");
     div.id = `paragraph${sentanceNumber+1}`;
@@ -304,13 +317,11 @@ function addSentence(result, source, sketchIllustration){
 
     let fadeinElement = document.getElementById(`paragraph${sentanceNumber+1}`);
 
-
-    // add the sketch to the page after a second
+    //fade the sentence into the page.
     setTimeout(() => {
       fadein(fadeinElement);
     }, 1200);
   }
-
   // console.log('sentanceNumber', sentanceNumber);
 }
 
@@ -377,8 +388,6 @@ function startbuttonPressed(clicked_id){
     fadein(fadeinComponent1);
     fadein(fadeinComponent2);
   }, 1200);
-
-
 }
 
 
@@ -392,7 +401,7 @@ var sketchRnnDrawing = function( drawingOne ) {
   // var y = 100;
 
   drawingOne.setup = function() {
-    drawingOne.createCanvas(600, 450);
+    drawingOne.createCanvas(600, 350);
     drawingOne.background(255);
     previous_pen = 'down';
     drawingOne.loop();
@@ -401,6 +410,14 @@ var sketchRnnDrawing = function( drawingOne ) {
 
   drawingOne.draw = function() {
     if (sketch) {
+      // playsound(sketch.dx, sketch.dy);
+
+      penStrokes ++;
+      if (penStrokes % 10 == 0){
+        playNote1( "1n", convertDiamToNote(sketch.dy));
+      }
+
+
       if (previous_pen == 'down') {
         drawingOne.stroke(sketchColor);
         drawingOne.strokeWeight(6);
@@ -415,12 +432,12 @@ var sketchRnnDrawing = function( drawingOne ) {
         sketchmodel.generate(gotSketch);
       } else {
         //when finished --> add another sentence
-        window.setTimeout(() => {
-          // console.log("add new sentance");
-          enhanceStory(sentanceNumber);
-        }, 7000);
-
+        // setTimeout(() => {
+        //   // console.log("add new sentance");
+        //   enhanceStory(sentanceNumber);
+        // }, 7000);
         drawingOne.noLoop();
+        penStrokes = 0;
         previous_pen = sketch.pen;
         sketch = null;
         sketchmodel = null;
@@ -440,7 +457,6 @@ function loadASketch(drawing){
   });
 
   //create a div container for drawing
-
   drawingNumber ++;
 
   var div = document.createElement("div");
@@ -452,16 +468,25 @@ function loadASketch(drawing){
 
   var drawingCanvas = new p5(sketchRnnDrawing, document.getElementById(`drawing${sentanceNumber}`));
   if( sentanceNumber != 1){
-    let elm  = document.getElementById(`drawing${sentanceNumber}`);
-    elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // let elm  = document.getElementById(`drawing${sentanceNumber}`);
+    // elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
     // let dimThis  = document.getElementById(`paragraph${sentanceNumber-1}`);
     // dimElement(dimThis);
   }
+  //TODO align
+  setTimeout(() => {
+    let elm  = document.getElementById(`drawing${sentanceNumber}`);
+    elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 2000);
+
+
 }
 
 
-
+function playsound(x, y){
+  console.log(x,y);
+}
 
 //book animation
 function loadBookSketch(drawing){
@@ -486,9 +511,7 @@ function loadBookSketch(drawing){
   var drawingBookCanvas = new p5(sketchRnnBook, document.getElementById("bookillustration"));
 }
 
-
 //  Book animation in beginning
-
 function startDrawingbook() {
   x = startBookX/2;
   y = startBookY/2;
@@ -594,62 +617,165 @@ function enhanceStory(){
     // console.log("add new sentance");
     setTimeout(() => {
       ifInClass(similarSentences[sentanceNumber]);
-    }, 9000);
+      console.log("here",sentanceNumber);
+    }, 6000);
   }
 }
 
 
 // drawingClasses
 function ifInClass(theSentance){
+
+  //if you can still add sentences
   if (sentanceNumber <= maxSentences ){
+
+    //get theSentance to lower case
     let sentance = theSentance.toLowerCase();
+
+    //split sentence to array
     let sentenceToArray = sentance.split(" ");
+
+    //create new array called similarityArray
     similaritiesArray = [];
 
+    //fo all the words in that new sentence
     for (var i = 0; i < sentenceToArray.length; i++) {
+
+      //if a word in the class apears inside the sentence
       if (drawingClasses.indexOf(sentenceToArray[i].toLowerCase()) > -1) {
-        // console.log(sentenceToArray[i], "<-------is in the array!")
+
+        // great! found words, now push those word into similaritiesArray
         similaritiesArray.push(sentenceToArray[i]);
       } else {
-        // console.log("not in sentance");
-        //Not in the array
+        // didnt find any words do nothing
+
       }
     }
 
+    //if found words that match
     if (similaritiesArray.length > 0){
-      loadASketch(similaritiesArray[0].toLowerCase());
-      // window.setTimeout(() => {
-      //
-      // }, 5000);
-
-    }else{
-
-      // add a sentence
-      addSentence(similarSentences[sentanceNumber], 'sentence2Vec');
-
-      //focus on sentence
-      let elm  = document.getElementById(`paragraph${sentanceNumber}`);
-      elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-      // let dimThis  = document.getElementById(`paragraph${sentanceNumber-1}`);
-      // dimElement(dimThis);
-
-      //trigger the loop
-      window.setTimeout(() => {
-        // console.log("add new sentance");
-        ifInClass(similarSentences[sentanceNumber]);
-      }, 8000);
+      //TODO set a current sketch class
+      currIllustration = similaritiesArray[0]
+      return currIllustration;
+      //add that sketch class to the document
+      //TODO used to load a --->
+      // loadASketch(similaritiesArray[0].toLowerCase());
     }
 
-  }else{
-    // if it' the end trigger the end
-    // console.log("TheEnd");
-    addSentence('The End', 'EndOfStory');
+
+    //dont do all this for now
+    // else{
+    //
+    //   // add a sentence
+    //   addSentence(similarSentences[sentanceNumber], 'sentence2Vec');
+    //
+    //   //focus on sentence
+    //   let elm  = document.getElementById(`paragraph${sentanceNumber}`);
+    //   elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    //
+    //   // let dimThis  = document.getElementById(`paragraph${sentanceNumber-1}`);
+    //   // dimElement(dimThis);
+    //
+    //   //trigger the loop
+    //   setTimeout(() => {
+    //     // console.log("add new sentance");
+    //     ifInClass(similarSentences[sentanceNumber]);
+    //   }, 8000);
+    // }
   }
 }
 
 
 ///Utils
+
+
+
+///convert daim to note
+function convertDiamToNote(locationY){
+
+  let sketchNotationArray = [];
+
+  let note;
+  switch (Math.floor(convertRange( locationY, [ -50, 50 ], [ -1, 22 ] ))) {
+    case -1:
+    note = 0;
+    break;
+    case 0:
+    note = 0;
+    break;
+    case 1:
+    note = 196.00;
+    break;
+    case 2:
+    note = 220.00;
+    break;
+    case 3:
+    note = 246.94;
+    break;
+    case 4:
+    note = 261.63;
+    break;
+    case 5:
+    note = 293.66;
+    break;
+    case 6:
+    note = 329.63;
+    break;
+    case 7:
+    note = 369.99;
+    break;
+    case 8:
+    note = 392.00;
+    break;
+    case 9:
+    note = 440.00;
+    break;
+    case 10:
+    note = 493.88;
+    break;
+    case 11:
+    note = 523.25;
+    break;
+    case 12:
+    note = 587.33;
+    break;
+    case 13:
+    note = 659.25;
+    break;
+    case 14:
+    note = 739.99;
+    break;
+    case 15:
+    note = 783.99;
+    break;
+    case 16:
+    note = 880.00;
+    break;
+    case 17:
+    note = 987.77;
+    break;
+    case 18:
+    note = 1046.50;
+    break;
+    case 19:
+    note = 1174.66;
+    break;
+    case 20:
+    note = 1318.51;
+    break;
+    case 21:
+    note = 1479.98;
+    break;
+    case 22:
+    note = 1567.98;
+  }
+  return note;
+}
+
+
+function convertRange( value, r1, r2 ) {
+  return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
+}
 
 
 
@@ -719,4 +845,40 @@ function getRandomColor() {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
+}
+
+
+function playNote1(time, note) {
+  if (note != undefined) {
+    synthOne.triggerAttackRelease(note, "4n");
+  }
+}
+
+
+
+let synthOne = createSyntOnehWithEffects();
+
+function createSyntOnehWithEffects()  {
+  let vol = new Tone.Volume(-40).toMaster();
+
+  let reverb = new Tone.Freeverb(0.02).connect(vol);
+  reverb.wet.value = 0.02;
+
+  let delay = new Tone.FeedbackDelay(0.304, 0.05).connect(reverb);
+  delay.wet.value = 0.02;
+
+  let vibrato = new Tone.Vibrato(5, 0.01).connect(delay);
+
+  let polySynth = new Tone.PolySynth(3, Tone.Synth, {
+    "oscillator": {
+      "type": "sine"
+    },
+    "envelope": {
+      "attack": 0.08,
+      "decay": 0.9,
+      "sustain": 0.6,
+      "release": 9.7,
+    }
+  });
+  return polySynth.connect(vibrato);
 }
