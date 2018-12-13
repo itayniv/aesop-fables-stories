@@ -147,12 +147,15 @@ function findVector(sentance, n = 10){
     let sentiment = new Sentiment();
     let result = sentiment.analyze(sentencesResults[i]);
     // console.log(result);    // Score: -2, Comparative: -0.666
-    
+
 
     sentimentResults.push(result.score);
 
   }
   console.log(sentimentResults);
+  sockets.emit('sentencesSentiment', sentimentResults);
+
+
 
 }
 

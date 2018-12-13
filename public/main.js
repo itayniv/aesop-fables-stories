@@ -20,9 +20,9 @@ let startingValue = 120;
 let similarSentences = [];
 let similaritiesArray = [];
 let sketchColor;
-let maxSentences = 9;
+let maxSentences = 8;
 let startStory = false;
-
+let penStrokesopening = 0;
 let viewportWidth;
 let viewportHeight;
 
@@ -36,11 +36,12 @@ let netTemperature;
 
 let userStory = [];
 let storyBuild = [];
-let currIllustration = 'lion';
+let currIllustration = '';
 
 let fablesJson;
 
 let sentanceContainer = [];
+let sentimentContainer = [];
 
 ////// sketchRnnDrawing stuff
 
@@ -48,7 +49,7 @@ let sketchmodel;
 let previous_pen = 'down';
 let x, y;
 let startX = 300;
-let startY = 200;
+let startY = 150;
 
 let startBookX;
 let startBookY;
@@ -56,8 +57,7 @@ let sketch;
 
 
 
-let drawingClasses = ["alarm_clock",	"ambulance",	"angel", "ant", "antyoga",
-"backpack",	"barn",	"basket",	"bear",	"bee",
+let drawingClasses = ["alarm_clock",	"ambulance",	"angel", "ant", "antyoga","backpack",	"barn",	"basket",	"bear",	"bee",
 "beeflower",	"bicycle",	"bird",	"book",	"brain",
 "bridge",	"bulldozer",	"bus",	"butterfly",	"cactus",
 "calendar",	"castle",	"cat",	"catbus",	"catpig",
@@ -77,9 +77,22 @@ let drawingClasses = ["alarm_clock",	"ambulance",	"angel", "ant", "antyoga",
 "sheep",	"skull",	"snail",	"snowflake",	"speedboat",
 "spider",	"squirrel",	"steak",	"stove",	"strawberry",
 "swan",	"swing_set",	"the_mona_lisa",	"tiger",	"toothbrush",
-"toothpaste",	"tractor",	"trombone",	"truck	whale",
+"toothpaste",	"tractor",	"trombone",	"truck",	"whale",
 "windmill",	"yoga",	"yogabicycle",	"everything"];
 
+let birdsArr = ["jackdaw", "eagle", "crow", "crows", "swallow", "raven", "kite", "lark", "chicken", "chickens"];
+let swanArr = ["crane","cranes", "goose","ducks", "peacock", "peacocks" ];
+let mosquitoArr = ["gnat", "grasshopper", "flies", "wasps", "hornet"];
+let dogArr = ["goats", "wolf", "fox","dogs", "boar", "weasels", "weasel" ];
+let sheepArr = ["lamb"];
+let spiderArr = ["beetle"];
+let basketArr = ["pail"];
+let turtleArr = ["tortoise"];
+let squirrelArr =["hare"];
+let lionArr = ["lion's"];
+let catArr = ["tiger", "tiger's", "tigers", "cats"];
+let owlArr = ["owl's"];
+let frogArr = ["frogs", "frog's"]
 
 function convertRange( value, r1, r2 ) {
   return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
@@ -191,6 +204,13 @@ socket.on('sentencesResults', function(result){
 });
 
 
+socket.on('sentencesSentiment', function(result){
+  // console.log(result);
+  sentimentContainer = result;
+});
+
+
+
 function runjsonCheck(json, checkword){
 
   // add a regex search for a specific given word
@@ -271,7 +291,7 @@ function addSentence(result, source, sketchIllustration){
       // dimElement(dimThis);
       setTimeout(() => {
         //scroll into the sentence
-        console.log(`Adding sentence number${sentanceNumber}`);
+        // console.log(`Adding sentence number${sentanceNumber}`);
 
         let elm  = document.getElementById(`paragraph${sentanceNumber}`);
         elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -280,6 +300,10 @@ function addSentence(result, source, sketchIllustration){
         let fadeinElement = document.getElementById(`paragraph${sentanceNumber}`);
         fadein(fadeinElement);
       }, 500);
+
+      //run sentence enrichment
+
+
 
       //run check to see if there is an illustration that fits here
       let thisClass = ifInClass(result);
@@ -332,6 +356,7 @@ function buttonPressed(clicked_id){
   let animalOne = document.getElementById(clicked_id).innerHTML;
   //convert to lowercase
   let animalOneLower = animalOne.toLowerCase();
+
   currIllustration = animalOneLower;
 
   //run the check function
@@ -366,11 +391,11 @@ function buttonPressed(clicked_id){
 
 function startbuttonPressed(clicked_id){
 
+  sketch = null;
+
   startStory = true;
 
   setTimeout(() => {
-
-
     let fadeoutComponent1 = document.getElementById("book");
     fadeout(fadeoutComponent1);
   }, 300);
@@ -388,9 +413,14 @@ function startbuttonPressed(clicked_id){
     fadein(fadeinComponent1);
     fadein(fadeinComponent2);
   }, 1200);
+
+  setTimeout(() => {
+    let elm  = document.getElementById(`startbutton`);
+    elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 1400);
 }
 
-
+//
 
 
 ///////sketchrnn
@@ -413,9 +443,33 @@ var sketchRnnDrawing = function( drawingOne ) {
       // playsound(sketch.dx, sketch.dy);
 
       penStrokes ++;
-      if (penStrokes % 10 == 0){
-        playNote1( "1n", convertDiamToNote(sketch.dy));
+
+
+      if (sentimentContainer[sentanceNumber] >= 0){
+        if (penStrokes % 14 == 0){
+          if((currIllustration == 'lion') || (currIllustration == 'dog')|| (currIllustration == 'bear')) {
+            playNote2( noteLength(sketch.dx), convertDiamToNoteMajor(sketch.dy));
+          }else{
+            playNote1( noteLength(sketch.dx), convertDiamToNoteMajor(sketch.dy));
+          }
+          // console.log(sketch.dy,sketch.dx)
+
+          // console.log("playingMajor",sentimentContainer[sentanceNumber] );
+        }
+      }else{
+        if (penStrokes % 14 == 0){
+          if((currIllustration == 'lion') ||(currIllustration == 'dog')|| (currIllustration == 'bear')){
+            console.log(currIllustration, "currIllustration")
+            playNote1( noteLength(sketch.dx), convertDiamToNoteMinor(sketch.dy));
+          }else{
+            playNote2( noteLength(sketch.dx), convertDiamToNoteMinor(sketch.dy));
+
+          }
+
+
+        }
       }
+
 
 
       if (previous_pen == 'down') {
@@ -468,8 +522,7 @@ function loadASketch(drawing){
 
   var drawingCanvas = new p5(sketchRnnDrawing, document.getElementById(`drawing${sentanceNumber}`));
   if( sentanceNumber != 1){
-    // let elm  = document.getElementById(`drawing${sentanceNumber}`);
-    // elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
 
     // let dimThis  = document.getElementById(`paragraph${sentanceNumber-1}`);
     // dimElement(dimThis);
@@ -506,6 +559,7 @@ function loadBookSketch(drawing){
   div.style.paddingBottom = "0px";
   div.style.position = "absolute";
   div.style.zIndex = "1";
+  div.style.top = "0px";
   document.getElementById("book").appendChild(div);
 
   var drawingBookCanvas = new p5(sketchRnnBook, document.getElementById("bookillustration"));
@@ -539,6 +593,17 @@ var sketchRnnBook = function( drawingBook ) {
   drawingBook.draw = function() {
     if (sketch) {
       if (previous_pen == 'down') {
+        //make music here
+        penStrokesopening ++;
+
+          if (penStrokesopening % 20 == 0){
+            let noteToPlay = convertDiamToNoteMajor(sketch.dy);
+            if(noteToPlay == undefined){
+              noteToPlay = 0;
+            }
+            playNoteStart( noteLength(sketch.dx), noteToPlay);
+          }
+
         drawingBook.stroke(sketchColor);
         drawingBook.strokeWeight(3);
         drawingBook.line(x, y, x + sketch.dx/2, y + sketch.dy/2);
@@ -605,8 +670,6 @@ function gotSketch(err, s) {
 
 
 
-
-
 function enhanceStory(){
   //check if lower than length
   if(sentanceNumber <= 10){
@@ -617,7 +680,6 @@ function enhanceStory(){
     // console.log("add new sentance");
     setTimeout(() => {
       ifInClass(similarSentences[sentanceNumber]);
-      console.log("here",sentanceNumber);
     }, 6000);
   }
 }
@@ -632,12 +694,27 @@ function ifInClass(theSentance){
     //get theSentance to lower case
     let sentance = theSentance.toLowerCase();
 
+    //remove, ! . ?
+    let newsentance = sentance.replace('.', '');
+    newsentance = newsentance.replace(',', '');
+    newsentance = newsentance.replace('?', '');
+    newsentance = newsentance.replace('!', '');
+
     //split sentence to array
-    let sentenceToArray = sentance.split(" ");
+    let sentenceToArray = newsentance.split(" ");
 
     //create new array called similarityArray
     similaritiesArray = [];
 
+
+    let addClasses = enrichSketchClass(newsentance);
+
+
+    for (var i = 0; i < addClasses.length; i++) {
+      console.log(`add ${addClasses[i]} to array`);
+      sentenceToArray.push(addClasses[i]);
+    }
+    // console.log(sentenceToArray);
     //fo all the words in that new sentence
     for (var i = 0; i < sentenceToArray.length; i++) {
 
@@ -661,27 +738,6 @@ function ifInClass(theSentance){
       //TODO used to load a --->
       // loadASketch(similaritiesArray[0].toLowerCase());
     }
-
-
-    //dont do all this for now
-    // else{
-    //
-    //   // add a sentence
-    //   addSentence(similarSentences[sentanceNumber], 'sentence2Vec');
-    //
-    //   //focus on sentence
-    //   let elm  = document.getElementById(`paragraph${sentanceNumber}`);
-    //   elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    //
-    //   // let dimThis  = document.getElementById(`paragraph${sentanceNumber-1}`);
-    //   // dimElement(dimThis);
-    //
-    //   //trigger the loop
-    //   setTimeout(() => {
-    //     // console.log("add new sentance");
-    //     ifInClass(similarSentences[sentanceNumber]);
-    //   }, 8000);
-    // }
   }
 }
 
@@ -690,13 +746,91 @@ function ifInClass(theSentance){
 
 
 
+
+
+
+
+function enrichSketchClass(theSentance){
+
+  let enrichClass;
+  //get theSentance to lower case
+  let sentance = theSentance.toLowerCase();
+
+  //split sentence to array
+  let sentenceToArray = sentance.split(" ");
+
+  //create new array called similarityArray
+  let newSimilaritiesArray = [];
+
+  //fo all the words in that new sentence
+  for (var i = 0; i < sentenceToArray.length; i++) {
+
+    //if a word in the class apears inside the sentence
+    if (squirrelArr.indexOf(sentenceToArray[i].toLowerCase()) > -1) {
+      newSimilaritiesArray.push('squirrel');
+      // console.log("found a squirrel");
+    } else if(turtleArr.indexOf(sentenceToArray[i].toLowerCase()) > -1){
+      // console.log("found a turtle");
+      newSimilaritiesArray.push('sea_turtle');
+    }else if(basketArr.indexOf(sentenceToArray[i].toLowerCase()) > -1){
+      // console.log("found a basket");
+      newSimilaritiesArray.push('basket');
+
+    }else if(spiderArr.indexOf(sentenceToArray[i].toLowerCase()) > -1){
+      // console.log("found a spider");
+      newSimilaritiesArray.push('spider');
+
+    }else if(sheepArr.indexOf(sentenceToArray[i].toLowerCase()) > -1){
+      // console.log("found a sheep");
+      newSimilaritiesArray.push('sheep');
+
+    }else if(dogArr.indexOf(sentenceToArray[i].toLowerCase()) > -1){
+      // console.log("found a dog");
+      newSimilaritiesArray.push('dog');
+
+    }else if(mosquitoArr.indexOf(sentenceToArray[i].toLowerCase()) > -1){
+      // console.log("found a mosquito");
+      newSimilaritiesArray.push('mosquito');
+
+    }else if(swanArr.indexOf(sentenceToArray[i].toLowerCase()) > -1){
+      // console.log("found a swan");
+      newSimilaritiesArray.push('swan');
+
+    }else if(birdsArr.indexOf(sentenceToArray[i].toLowerCase()) > -1){
+      // console.log("found a bird");
+      newSimilaritiesArray.push('bird');
+    }
+    else if(lionArr.indexOf(sentenceToArray[i].toLowerCase()) > -1){
+      // console.log("found a lion");
+      newSimilaritiesArray.push('lion');
+    }
+    else if(owlArr.indexOf(sentenceToArray[i].toLowerCase()) > -1){
+      // console.log("found a owl");
+      newSimilaritiesArray.push('owl');
+    }
+    else if(catArr.indexOf(sentenceToArray[i].toLowerCase()) > -1){
+      // console.log("found a cat");
+      newSimilaritiesArray.push('cat');
+    }
+    else if(frogArr.indexOf(sentenceToArray[i].toLowerCase()) > -1){
+      // console.log("found a frog");
+      newSimilaritiesArray.push('frog');
+    }
+    else {
+      // console.log("didnt find anything");
+      // didnt find any words do nothing
+    }
+  }
+  return newSimilaritiesArray;
+}
+
+
+
 ///convert daim to note
-function convertDiamToNote(locationY){
-
+function convertDiamToNoteMajor(locationY){
   let sketchNotationArray = [];
-
   let note;
-  switch (Math.floor(convertRange( locationY, [ -50, 50 ], [ -1, 22 ] ))) {
+  switch (Math.floor(convertRange( locationY, [ -20, 20 ], [ -1, 15 ] ))) {
     case -1:
     note = 0;
     break;
@@ -704,72 +838,197 @@ function convertDiamToNote(locationY){
     note = 0;
     break;
     case 1:
-    note = 196.00;
-    break;
-    case 2:
-    note = 220.00;
-    break;
-    case 3:
     note = 246.94;
     break;
+    case 2:
+    note = 277.183;
+    break;
+    case 3:
+    note = 311.127;
+    break;
     case 4:
-    note = 261.63;
-    break;
-    case 5:
-    note = 293.66;
-    break;
-    case 6:
     note = 329.63;
     break;
-    case 7:
+    case 5:
     note = 369.99;
     break;
+    case 6:
+    note = 415.305;
+    break;
+    case 7:
+    note = 466.1638;
+    break;
     case 8:
-    note = 392.00;
+    note =  493.8833;
     break;
     case 9:
-    note = 440.00;
+    note = 554.3653;
     break;
     case 10:
-    note = 493.88;
+    note = 622.254;
     break;
     case 11:
-    note = 523.25;
+    note = 659.2551;
     break;
     case 12:
-    note = 587.33;
+    note = 739.9888;
     break;
     case 13:
-    note = 659.25;
+    note = 830.6094;
     break;
     case 14:
-    note = 739.99;
+    note = 932.3275;
     break;
     case 15:
-    note = 783.99;
-    break;
-    case 16:
-    note = 880.00;
-    break;
-    case 17:
-    note = 987.77;
-    break;
-    case 18:
-    note = 1046.50;
-    break;
-    case 19:
-    note = 1174.66;
-    break;
-    case 20:
-    note = 1318.51;
-    break;
-    case 21:
-    note = 1479.98;
-    break;
-    case 22:
-    note = 1567.98;
+    note = 987.7666;
   }
   return note;
+}
+
+
+function clamp(num, min, max) {
+  return num <= min ? min : num >= max ? max : num;
+}
+
+function convertDiamToNoteMinor(locationY){
+  let sketchNotationArray = [];
+  let note;
+  switch (Math.floor(convertRange( locationY, [ -20, 20 ], [ -1, 15 ] ))) {
+    case -1:
+    note = 0;
+    break;
+    case 0:
+    note = 0;
+    break;
+    case 1:
+    note = 246.94;
+    break;
+    case 2:
+    note = 277.183;
+    break;
+    case 3:
+    note = 293.665;
+    break;
+    case 4:
+    note = 329.63;
+    break;
+    case 5:
+    note = 369.99;
+    break;
+    case 6:
+    note = 391.995;
+    break;
+    case 7:
+    note = 440.0000;
+    break;
+    case 8:
+    note =  493.8833;
+    break;
+    case 9:
+    note = 554.3653;
+    break;
+    case 10:
+    note = 587.3295;
+    break;
+    case 11:
+    note = 659.2551;
+    break;
+    case 12:
+    note = 739.9888;
+    break;
+    case 13:
+    note = 783.9909;
+    break;
+    case 14:
+    note = 880.0000;
+    break;
+    case 15:
+    note = 987.7666;
+  }
+  return note;
+}
+
+
+
+function noteLength(locationX){
+
+  let noteLength;
+  let note;
+  let newlocationX = clamp(locationX, -60, 60)
+
+  switch (Math.floor(convertRange( newlocationX, [ -60, 60 ], [ -1, 22 ] ))) {
+    case 0:
+    noteLength = "2n";
+    break;
+    case 1:
+    noteLength = "2n";
+    break;
+    case 2:
+    noteLength = "2n";
+    break;
+    case 3:
+    noteLength = "2n";
+    break;
+    case 4:
+    noteLength = "3n";
+    break;
+    case 5:
+    noteLength = "3n";
+    break;
+    case 6:
+    noteLength = "3n";
+    break;
+    case 7:
+    noteLength = "4n";
+    break;
+    case 8:
+    noteLength = "4n";
+    break;
+    case 9:
+    noteLength = "4n";
+    break;
+    case 10:
+    noteLength = "5n";
+    break;
+    case 11:
+    noteLength = "6n";
+    break;
+    case 12:
+    noteLength = "7n";
+    break;
+    case 13:
+    noteLength = "8n";
+    break;
+    case 14:
+    noteLength = '9n';
+    break;
+    case 15:
+    noteLength = "10n";
+    break;
+    case 16:
+    noteLength = "11n";
+    break;
+    case 17:
+    noteLength = "12n";
+    break;
+    case 18:
+    noteLength = "16n";
+    break;
+    case 19:
+    noteLength = "16n";
+    break;
+    case 20:
+    noteLength = "18n";
+    break;
+    case 21:
+    noteLength = "18n";
+    break;
+    case 22:
+    noteLength = "20n";
+
+  }
+  // console.log("here",noteLength, locationX);
+  return noteLength;
 }
 
 
@@ -850,16 +1109,34 @@ function getRandomColor() {
 
 function playNote1(time, note) {
   if (note != undefined) {
-    synthOne.triggerAttackRelease(note, "4n");
+    synthOne.triggerAttackRelease(note, time);
+  }
+}
+
+
+function playNote2(time, note) {
+  if (note != undefined) {
+    synthTwo.triggerAttackRelease(note, time);
+  }
+}
+
+
+function playNoteStart(time, note) {
+  if (note != undefined) {
+    synthStart.triggerAttackRelease(note, time);
   }
 }
 
 
 
 let synthOne = createSyntOnehWithEffects();
+let synthTwo = createSyntTwohWithEffects();
+let synthStart = createSyntStarthWithEffects();
+
+
 
 function createSyntOnehWithEffects()  {
-  let vol = new Tone.Volume(-40).toMaster();
+  let vol = new Tone.Volume(-30).toMaster();
 
   let reverb = new Tone.Freeverb(0.02).connect(vol);
   reverb.wet.value = 0.02;
@@ -874,9 +1151,63 @@ function createSyntOnehWithEffects()  {
       "type": "sine"
     },
     "envelope": {
+      "attack": 0.01,
+      "decay": 0.9,
+      "sustain": 0.6,
+      "release": 9.7,
+    }
+  });
+  return polySynth.connect(vibrato);
+}
+
+
+
+function createSyntTwohWithEffects()  {
+  let vol = new Tone.Volume(-30).toMaster();
+
+  let reverb = new Tone.Freeverb(0.02).connect(vol);
+  reverb.wet.value = 0.02;
+
+  let delay = new Tone.FeedbackDelay(0.304, 0.05).connect(reverb);
+  delay.wet.value = 0.02;
+
+  let vibrato = new Tone.Vibrato(5, 0.01).connect(delay);
+
+  let polySynth = new Tone.PolySynth(3, Tone.Synth, {
+    "oscillator": {
+      "type": "sawtooth6"
+    },
+    "envelope": {
       "attack": 0.08,
       "decay": 0.9,
       "sustain": 0.6,
+      "release": 9.7,
+    }
+  });
+  return polySynth.connect(vibrato);
+}
+
+
+
+function createSyntStarthWithEffects()  {
+  let vol = new Tone.Volume(-30).toMaster();
+
+  let reverb = new Tone.Freeverb(0.2).connect(vol);
+  reverb.wet.value = 0.02;
+
+  let delay = new Tone.FeedbackDelay(0.304, 0.05).connect(reverb);
+  delay.wet.value = 0.1;
+
+  let vibrato = new Tone.Vibrato(5, 0.04).connect(delay);
+
+  let polySynth = new Tone.PolySynth(3, Tone.Synth, {
+    "oscillator": {
+      "type": "sine"
+    },
+    "envelope": {
+      "attack": 0.06,
+      "decay": 0.9,
+      "sustain": 0.8,
       "release": 9.7,
     }
   });
