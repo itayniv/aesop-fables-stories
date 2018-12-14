@@ -448,29 +448,45 @@ var sketchRnnDrawing = function( drawingOne ) {
 
 
       if (sentimentContainer[sentanceNumber] >= 0){
-        if (penStrokes % 14 == 0){
-          if((currIllustration == 'lion') || (currIllustration == 'dog')|| (currIllustration == 'bear')) {
-            playNote2( noteLength(sketch.dx), convertDiamToNoteMajor(sketch.dy));
-          }else{
-            playNote1( noteLength(sketch.dx), convertDiamToNoteMajor(sketch.dy));
+        //sentiment is positive
+
+        //for these animals play this synth
+        if( (currIllustration == 'lion') || (currIllustration == 'dog')|| (currIllustration == 'bear') ){
+          // each 25th pen stroke
+          if (penStrokes % 25 == 0){
+            let notetoplayMajor = convertDiamToNoteMajor(sketch.dy)/4;
+            console.log(notetoplayMajor,"notetoplayMajor");
+            playNote2( noteLength(sketch.dx), notetoplayMajor);
           }
-          // console.log(sketch.dy,sketch.dx)
-
-          // console.log("playingMajor",sentimentContainer[sentanceNumber] );
-        }
-      }else{
-        if (penStrokes % 14 == 0){
-          if((currIllustration == 'lion') ||(currIllustration == 'dog')|| (currIllustration == 'bear')){
-            console.log(currIllustration, "currIllustration")
-            playNote1( noteLength(sketch.dx), convertDiamToNoteMinor(sketch.dy));
-          }else{
-            playNote2( noteLength(sketch.dx), convertDiamToNoteMinor(sketch.dy));
-
+        } else{
+          //play this synth each 12th stroke
+          if (penStrokes % 12 == 0){
+            playNote1( noteLength(sketch.dx), convertDiamToNoteMajor(sketch.dy)*2);
           }
-
-
         }
+      } else {
+        // Sentiment is negeative
+
+        //for these animals play this synth
+        if( (currIllustration == 'lion') || (currIllustration == 'dog')|| (currIllustration == 'bear') ){
+          // each 25th pen stroke
+          if (penStrokes % 25 == 0){
+            let notetoplayMinor = convertDiamToNoteMinor(sketch.dy)/4;
+            console.log(notetoplayMinor,"notetoplayMinor");
+            playNote2( noteLength(sketch.dx), notetoplayMinor);
+          }
+        } else{
+          //play this synth each 12th stroke
+          if (penStrokes % 12 == 0){
+            playNote1( noteLength(sketch.dx), convertDiamToNoteMinor(sketch.dy)*2);
+          }
+        }
+
+
       }
+
+
+
 
 
 
@@ -598,13 +614,13 @@ var sketchRnnBook = function( drawingBook ) {
         //make music here
         penStrokesopening ++;
 
-          if (penStrokesopening % 20 == 0){
-            let noteToPlay = convertDiamToNoteMajor(sketch.dy);
-            if(noteToPlay == undefined){
-              noteToPlay = 0;
-            }
-            playNoteStart( noteLength(sketch.dx), noteToPlay);
+        if (penStrokesopening % 20 == 0){
+          let noteToPlay = convertDiamToNoteMajor(sketch.dy);
+          if(noteToPlay == undefined){
+            noteToPlay = 0;
           }
+          playNoteStart( noteLength(sketch.dx), noteToPlay);
+        }
 
         drawingBook.stroke(sketchColor);
         drawingBook.strokeWeight(3);
@@ -831,9 +847,12 @@ function enrichSketchClass(theSentance){
 
 ///convert daim to note
 function convertDiamToNoteMajor(locationY){
+
+  let newlocationY = clamp(locationY, -60, 60)
+
   let sketchNotationArray = [];
   let note;
-  switch (Math.floor(convertRange( locationY, [ -20, 20 ], [ -1, 15 ] ))) {
+  switch (Math.floor(convertRange( newlocationY, [ -60, 60 ], [ -1, 15 ] ))) {
     case -1:
     note = 0;
     break;
@@ -894,9 +913,12 @@ function clamp(num, min, max) {
 }
 
 function convertDiamToNoteMinor(locationY){
+
+  let newlocationY = clamp(locationY, -60, 60)
+
   let sketchNotationArray = [];
   let note;
-  switch (Math.floor(convertRange( locationY, [ -20, 20 ], [ -1, 15 ] ))) {
+  switch (Math.floor(convertRange( newlocationY, [ -60, 60 ], [ -1, 15 ] ))) {
     case -1:
     note = 0;
     break;
@@ -961,73 +983,73 @@ function noteLength(locationX){
 
   switch (Math.floor(convertRange( newlocationX, [ -60, 60 ], [ -1, 22 ] ))) {
     case 0:
-    noteLength = "2n";
+    noteLength = "4n";
     break;
     case 1:
-    noteLength = "2n";
+    noteLength = "4n";
     break;
     case 2:
-    noteLength = "2n";
-    break;
-    case 3:
-    noteLength = "2n";
-    break;
-    case 4:
-    noteLength = "3n";
-    break;
-    case 5:
-    noteLength = "3n";
-    break;
-    case 6:
-    noteLength = "3n";
-    break;
-    case 7:
-    noteLength = "4n";
-    break;
-    case 8:
-    noteLength = "4n";
-    break;
-    case 9:
-    noteLength = "4n";
-    break;
-    case 10:
     noteLength = "5n";
     break;
-    case 11:
+    case 3:
+    noteLength = "5n";
+    break;
+    case 4:
     noteLength = "6n";
     break;
-    case 12:
-    noteLength = "7n";
+    case 5:
+    noteLength = "6n";
     break;
-    case 13:
+    case 6:
     noteLength = "8n";
     break;
-    case 14:
-    noteLength = '9n';
+    case 7:
+    noteLength = "8n";
     break;
-    case 15:
+    case 8:
+    noteLength = "8n";
+    break;
+    case 9:
+    noteLength = "8n";
+    break;
+    case 10:
     noteLength = "10n";
     break;
-    case 16:
-    noteLength = "11n";
+    case 11:
+    noteLength = "10n";
     break;
-    case 17:
+    case 12:
+    noteLength = "10n";
+    break;
+    case 13:
     noteLength = "12n";
     break;
+    case 14:
+    noteLength = '12n';
+    break;
+    case 15:
+    noteLength = "12n";
+    break;
+    case 16:
+    noteLength = "12n";
+    break;
+    case 17:
+    noteLength = "14n";
+    break;
     case 18:
-    noteLength = "16n";
+    noteLength = "14n";
     break;
     case 19:
-    noteLength = "16n";
+    noteLength = "14n";
     break;
     case 20:
-    noteLength = "18n";
+    noteLength = "16n";
     break;
     case 21:
-    noteLength = "18n";
+    noteLength = "16n";
     break;
     case 22:
-    noteLength = "20n";
+    noteLength = "18n";
 
   }
   // console.log("here",noteLength, locationX);
@@ -1167,10 +1189,10 @@ function createSyntOnehWithEffects()  {
       "type": "sine"
     },
     "envelope": {
-      "attack": 0.01,
-      "decay": 0.9,
+      "attack": 0.03,
+      "decay": 0.1,
       "sustain": 0.6,
-      "release": 9.7,
+      "release": 4.7,
     }
   });
   return polySynth.connect(vibrato);
