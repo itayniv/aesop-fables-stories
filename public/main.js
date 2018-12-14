@@ -20,7 +20,7 @@ let startingValue = 120;
 let similarSentences = [];
 let similaritiesArray = [];
 let sketchColor;
-let maxSentences = 8;
+let maxSentences = 6;
 let startStory = false;
 let penStrokesopening = 0;
 let viewportWidth;
@@ -252,8 +252,6 @@ function runjsonCheck(json, checkword){
 }
 
 
-
-
 function addSentence(result, source, sketchIllustration){
 
   //if the current sentence is smaller than the entire length of the story
@@ -302,7 +300,6 @@ function addSentence(result, source, sketchIllustration){
       }, 500);
 
       //run sentence enrichment
-
 
 
       //run check to see if there is an illustration that fits here
