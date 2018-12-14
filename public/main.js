@@ -184,6 +184,12 @@ function init() {
   }, 1000);
 }
 
+window.onload = function() {
+  //fade the sentence into the page.
+  let fadeinElement = document.getElementById("start-button");
+  fadeinButton(fadeinElement);
+
+};
 
 
 function loadJsonfile(){
@@ -389,7 +395,6 @@ function buttonPressed(clicked_id){
 function startbuttonPressed(clicked_id){
 
   sketch = null;
-
   startStory = true;
 
   setTimeout(() => {
@@ -405,16 +410,16 @@ function startbuttonPressed(clicked_id){
   }, 700);
 
   setTimeout(() => {
-    let fadeinComponent1 = document.getElementById("prompt");
     let fadeinComponent2 = document.getElementById("characterOne");
-    fadein(fadeinComponent1);
     fadein(fadeinComponent2);
-  }, 1200);
+    let fadeinComponent1 = document.getElementById("prompt");
+    fadein(fadeinComponent1);
+  }, 1500);
 
   setTimeout(() => {
     let elm  = document.getElementById(`startbutton`);
     elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }, 1400);
+  }, 2400);
 }
 
 //
@@ -636,8 +641,9 @@ var sketchRnnBook = function( drawingBook ) {
         });
         //stop looping in draw
         if(startStory){
-          sketch = null;
           drawingBook.noLoop();
+          sketch = null;
+
         }
 
         //convert essential for stoping the animation
@@ -1089,6 +1095,19 @@ function fadein(element) {
     element.style.opacity = op;
     element.style.filter = 'alpha(opacity=' + op * 100 + ")";
     op += op * 0.1;
+  }, 10);
+}
+
+function fadeinButton(element) {
+  var op = 0.01;  // initial opacity
+  element.style.display = 'inline-block';
+  var timer = setInterval(function () {
+    if (op >= 1){
+      clearInterval(timer);
+    }
+    element.style.opacity = op;
+    element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+    op += op * 0.08;
   }, 10);
 }
 
