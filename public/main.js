@@ -20,7 +20,7 @@ let startingValue = 120;
 let similarSentences = [];
 let similaritiesArray = [];
 let sketchColor;
-let maxSentences = 6;
+let maxSentences = 3;
 let startStory = false;
 let penStrokesopening = 0;
 let viewportWidth;
@@ -50,7 +50,7 @@ let sketchBookmodel;
 let previous_pen = 'down';
 let x, y;
 let startX = 300;
-let startY = 150;
+let startY = 130;
 
 let startBookX;
 let startBookY;
@@ -84,7 +84,7 @@ let drawingClasses = ["alarm_clock",	"ambulance",	"angel", "ant", "antyoga","bac
 
 let birdsArr = ["jackdaw", "eagle", "crow", "crows", "swallow", "raven", "kite", "lark", "birds", "chicken", "chickens"];
 let swanArr = ["crane","cranes", "goose","ducks", "peacock", "peacocks" ];
-let mosquitoArr = ["gnat", "grasshopper", "flies", "wasps", "hornet"];
+let mosquitoArr = ["gnat", "grasshopper", "grasshoppers", "flies", "wasps", "hornet"];
 let dogArr = ["goats", "wolf", "fox","dogs", "boar", "weasels", "weasel" ];
 let sheepArr = ["lamb"];
 let spiderArr = ["beetle"];
@@ -256,7 +256,7 @@ function runjsonCheck(json, checkword){
   // add the sketch to the page
   setTimeout(() => {
     loadASketch(checkword);
-  }, 3000);
+  }, 2000);
 }
 
 
@@ -350,11 +350,76 @@ function addSentence(result, source, sketchIllustration){
     setTimeout(() => {
       fadein(fadeinElement);
     }, 1200);
+
+    setTimeout(() => {
+      addOneMoreButton();
+      console.log("read another Story");
+    }, 4000);
   }
   // console.log('sentanceNumber', sentanceNumber);
 }
 
 
+function addOneMoreButton(){
+  //if sentanceNumber is larger than the maxSentences
+
+  var div = document.createElement("div");
+  div.id = "read-one-more";
+  div.style.background = "white";
+  div.style.color = "white";
+  div.style.opacity = 0;
+  div.style.filter = 'alpha(opacity=' + 0 * 0 + ")";
+  div.style.margin = "auto";
+  div.style.width = "24%";
+
+  let btn = document.createElement("BUTTON");
+  btn.classList.add("one-more");
+  btn.onclick = function() { resetStory(); };
+  let node = document.createTextNode("Read one more.");
+  btn.appendChild(node);
+  document.getElementById("story").appendChild(div).appendChild(btn);
+
+  let fadeinElement = document.getElementById("read-one-more");
+  fadein(fadeinElement);
+
+  setTimeout(() => {
+    let elm  = document.getElementById('read-one-more');
+    elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 500);
+
+}
+
+
+function resetStory(){
+  console.log("Reset Story");
+
+  setTimeout(() => {
+    let fadeOutElement = document.getElementById("story");
+    fadeout(fadeOutElement);
+    // let elm  = document.getElementById('story');
+    // elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 500);
+
+  setTimeout(() => {
+    drawingNumber = 0;
+    sentanceNumber = 0;
+    document.getElementById("story").remove();
+
+    var div = document.createElement("div");
+    div.id = "story";
+    document.getElementById("story-container").appendChild(div);
+  }, 1000);
+
+  setTimeout(() => {
+    let fadeoutComponent1 = document.getElementById("characterOne");
+    fadein(fadeoutComponent1);
+  }, 1400);
+
+
+
+
+
+}
 
 function buttonPressed(clicked_id){
 
@@ -365,17 +430,18 @@ function buttonPressed(clicked_id){
 
   currIllustration = animalOneLower;
 
-  //run the check function
-  runjsonCheck(fablesJson, animalOneLower);
 
+
+  // fade out buttons and prompt
   setTimeout(() => {
     let fadeoutComponent1 = document.getElementById("characterOne");
     let fadeoutComponent2 = document.getElementById("recordedText");
 
     fadeout(fadeoutComponent1);
     fadeout(fadeoutComponent2);
-  }, 300);
+  }, 100);
 
+  // create the story name
   let para = document.createElement("p");
   let node = document.createTextNode(`A story about a ${animalOne}`);
   para.appendChild(node);
@@ -385,11 +451,17 @@ function buttonPressed(clicked_id){
   var element = document.getElementById("prompt");
   element.appendChild(para);
 
-
+  // fade in the story name
   setTimeout(() => {
     fadeInelement = document.getElementById("a-story-about");
     fadein(fadeInelement);
   }, 1000);
+
+  // run the storycheck
+  setTimeout(() => {
+    runjsonCheck(fablesJson, animalOneLower);
+  }, 1500);
+  //run the check function
 
 
 }
@@ -410,7 +482,7 @@ function startbuttonPressed(clicked_id){
     fadeout(fadeoutComponent);
 
 
-  }, 700);
+  }, 500);
 
   setTimeout(() => {
     let fadeinComponent2 = document.getElementById("characterOne");
@@ -441,13 +513,11 @@ var sketchRnnDrawing = function( drawingOne ) {
     previous_pen = 'down';
     sketchColor = getRandomColor();
 
-    console.log("init Canvas");
     drawingOne.loop();
   };
 
   drawingOne.draw = function() {
     if (sketch) {
-      // playsound(sketch.dx, sketch.dy);
 
       penStrokes ++;
       let penOffset = penStrokes % 4;
@@ -508,6 +578,7 @@ var sketchRnnDrawing = function( drawingOne ) {
         }
       }
 
+
       if (previous_pen == 'down') {
         drawingOne.stroke(sketchColor);
         drawingOne.strokeWeight(6);
@@ -542,7 +613,6 @@ var sketchRnnDrawing = function( drawingOne ) {
 
 function loadASketch(drawing){
   sketchmodel = ml5.SketchRNN(drawing, function() {
-    console.log("sketchmodelReadycalback");
     startDrawing();
   });
 
@@ -574,14 +644,13 @@ function loadASketch(drawing){
 
 
 function playsound(x, y){
-  console.log(x,y);
+  // console.log(x,y);
 }
 
 //book animation
 function loadBookSketch(drawing){
 
   sketchbookmodel = ml5.SketchRNN(drawing, function() {
-    console.log("sketchmodelReadyBook");
     startDrawingbook();
   });
 
@@ -705,10 +774,6 @@ function startDrawing() {
   sketchmodel.generate(gotSketch);
   previous_pen = 'down';
 }
-
-
-
-
 
 
 function gotSketch(err, s) {

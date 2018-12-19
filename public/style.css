@@ -572,10 +572,54 @@
 
     text-align: center;
     margin-top: -50px;
-    margin-left: -50px;
     width: 80%;
     height: 100%;
   }
+
+
+.one-more{
+  width: 100%;
+  text-align: center;
+  background: "white";
+  z-index: 100;
+  line-height: 60px;
+  font-size: 25px;
+  letter-spacing: .03em;
+  color: #8a8a8a;
+  font-family: 'Sumana', serif;
+  border: 2px solid #8a8a8a;
+}
+
+.one-more:hover{
+  text-align: center;
+  background: "white";
+  z-index: 100;
+  line-height: 60px;
+  font-size: 25px;
+  letter-spacing: .03em;
+  color: #8a8a8a;
+  font-family: 'Sumana', serif;
+  border: 2px solid #8a8a8a;
+  text-decoration: underline;
+}
+
+.one-more:focus{
+  text-align: center;
+  background: "white";
+  z-index: 100;
+  line-height: 60px;
+  font-size: 25px;
+  letter-spacing: .03em;
+  color: #8a8a8a;
+  font-family: 'Sumana', serif;
+  border: 2px solid #8a8a8a;
+  text-decoration: underline;
+  outline: none;
+}
+
+
+
+
 
 
   .start-button {
@@ -607,6 +651,24 @@
     font-family: 'Sumana', serif;
     color: #606060;
     text-decoration: underline;
+
+  }
+
+  .start-button:focus {
+    position: relative;
+    top: 350px;
+    left: 20px;
+    background: "white";
+    z-index:100;
+    width: 40%;
+    margin-top: 20px;
+    line-height: 60px;
+    font-size: 25px;
+    letter-spacing: .03em;
+    font-family: 'Sumana', serif;
+    color: #606060;
+    text-decoration: underline;
+    outline: none;
 
   }
 
