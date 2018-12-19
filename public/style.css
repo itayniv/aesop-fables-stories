@@ -16,8 +16,6 @@
     padding-top: 40px;
     padding-bottom: 40px;
     font-family: 'Sumana', serif;
-
-    /* font-family: 'Short Stack', cursive; */
     color: #15235a;
     font-size: 30px;
     line-height: 50px;
@@ -29,26 +27,6 @@
   }
 
 
-  .range-slider {
-
-    // Slider
-    .input-range {
-      /* -webkit-appearance: none; */
-      height: 200px;
-      border-radius: 5px;
-      background: #ccc;
-      outline: none;
-      /* writing-mode: bt-lr; /* IE */ */
-      /* -webkit-appearance: slider-vertical; /* WebKit */ */
-
-      writing-mode: bt-lr; /* IE */
-      -webkit-appearance: slider-vertical; /* WebKit */
-      width: 8px;
-      height: 175px;
-      padding: 0 5px;
-
-    }
-  }
 
   .flex-container {
     display: flex;
@@ -84,12 +62,10 @@
     position: relative;
     top: 50%;
     width: 200px;
-
     &:focus {
       outline: none !important;
     }
   }
-
 
   .textbox {
     text-align: center;
@@ -189,16 +165,6 @@
     z-index: 222;
   }
 
-  .reset-timer{
-    text-align: center;
-    font-family:  'Roboto Mono', monospace;
-    font-size: 12px;
-    font-weight: 300;
-    color: #999999;
-    position: relative;
-    top: -25px;
-  }
-
 
   .about{
     text-align: center;
@@ -209,17 +175,6 @@
     position: relative;
     z-index: 252;
     top: -30px;
-  }
-
-  .sub-text-instructions{
-    text-align: center;
-    font-family:'Roboto Mono', monospace;
-    font-size: 40px;
-    font-weight: 800;
-    color: #303030;
-    font-weight: 300;
-    position: relative;
-    top: -110px;
   }
 
 
@@ -250,20 +205,6 @@
     text-decoration: none !important;
   }
 
-  .about-musical-text{
-    padding-right: 10%;
-    padding-left: 10%;
-    text-align: center;
-    font-family:  'Roboto Mono', monospace;
-    font-size: 16px;
-    line-height: 1.5;
-    font-weight: 300;
-    color: #303030;
-    font-weight: 300;
-    position: relative;
-    top: 110px;
-    text-decoration: none !important;
-  }
 
   .about-header-text{
     padding-right: 25%;
@@ -281,21 +222,6 @@
 
   }
 
-  .about-created-text{
-    padding-right: 0%;
-    padding-left: 0%;
-    text-align: center;
-    font-family:  'Roboto Mono', monospace;
-    font-size: 14px;
-    line-height: 1.5;
-    font-weight: 600;
-    color: #303030;
-    font-weight: 300;
-    position: relative;
-    top: 120px;
-    text-decoration: none !important;
-
-  }
 
   .logo {
     text-align: center;
@@ -308,24 +234,25 @@
     background-color: 'white';
   }
 
+
   .book-div{
     "text-align: center;"
     position: absolute;
     z-index: 1;
-    /* width: 300px; */
-    /* height: 400px; */
   }
+
+
+
+
   .button {
-    z-index:100;
+    margin-left: 3px;
+    margin-right: 3px;
+    z-index: 100;
+    background-color: white;
+    border: 1.5px solid #9a9a9a;
     margin-top: 20px;
     line-height: 60px;
-    font-size: 20px;
-    font-family: 'Sumana', serif;
-    color: #606060;
-    /* font-family: 'Short Stack', cursive; */
-    padding: 0 5%;
-    background: #f3f3f3;
-    border: none;
+    padding: 0 4%;
   }
 
   .title-text{
@@ -376,14 +303,10 @@
   }
 
 
-  .button:hover {
-    background: lightsalmon;
-  }
 
 
-  .button:hover {
-    background: lightsalmon;
-  }
+
+
 
   .close {
     font-family:  'Roboto Mono', monospace;
@@ -400,13 +323,10 @@
     width: 90px;
     border: 0px solid lightgrey;
     padding: 0px;
-
-
   }
-
-
-
 }
+
+
 
 @media screen and (min-width: 1200px) {
 
@@ -604,15 +524,47 @@
   }
 
   .button {
+    margin-left: 3px;
+    margin-right: 3px;
+    z-index: 100;
+    background-color: white;
+    border: 1.5px solid #9a9a9a;
     margin-top: 20px;
     line-height: 60px;
-    font-weight: bold;
-    padding: 0 40px;
-    background: #f3f3f3;
-    border: none;
+    padding: 0 4%;
+  }
+
+  .button:hover {
+    background: #fff7ac;
+    text-decoration: underline;
   }
 
 
+.button-holder{
+  z-index: 100;
+  font-size: 20px;
+  width:23%;
+  background-color: white;
+  font-family: 'Sumana', serif;
+  border: 1.5px solid #868686;
+}
+
+.illustration-container{
+  border: none !important;
+}
+
+
+.img-thumbnail{
+  border: none;
+  display: block;
+  margin: auto;
+  padding-top: 20px;
+  width: 55px;
+  padding-bottom: 10px;
+  opacity: 0.8;
+  background: none;
+
+}
   .buttonContainer{
     position: absolute;
     top: 0%;
@@ -621,9 +573,11 @@
     text-align: center;
     margin-top: -50px;
     margin-left: -50px;
-    width: 100%;
+    width: 80%;
     height: 100%;
   }
+
+
   .start-button {
     position: relative;
     top: 350px;
@@ -636,9 +590,6 @@
     font-size: 25px;
     letter-spacing: .03em;
     font-family: 'Sumana', serif;
-    color: #606060;
-    /* font-family: 'Short Stack', cursive; */
-
     border: 2px solid #868686;
 
   }
@@ -667,15 +618,6 @@
     margin-top: 2%;
   }
 
-
-  .button:hover {
-    background: #dadada;
-  }
-
-
-  .button:hover {
-    background: #dadada;
-  }
 
 
 

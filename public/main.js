@@ -46,6 +46,7 @@ let sentimentContainer = [];
 ////// sketchRnnDrawing stuff
 
 let sketchmodel;
+let sketchBookmodel;
 let previous_pen = 'down';
 let x, y;
 let startX = 300;
@@ -54,6 +55,7 @@ let startY = 150;
 let startBookX;
 let startBookY;
 let sketch;
+let bookSketch;
 
 
 
@@ -80,14 +82,14 @@ let drawingClasses = ["alarm_clock",	"ambulance",	"angel", "ant", "antyoga","bac
 "toothpaste",	"tractor",	"trombone",	"truck",	"whale",
 "windmill",	"yoga",	"yogabicycle",	"everything"];
 
-let birdsArr = ["jackdaw", "eagle", "crow", "crows", "swallow", "raven", "kite", "lark", "chicken", "chickens"];
+let birdsArr = ["jackdaw", "eagle", "crow", "crows", "swallow", "raven", "kite", "lark", "birds", "chicken", "chickens"];
 let swanArr = ["crane","cranes", "goose","ducks", "peacock", "peacocks" ];
 let mosquitoArr = ["gnat", "grasshopper", "flies", "wasps", "hornet"];
 let dogArr = ["goats", "wolf", "fox","dogs", "boar", "weasels", "weasel" ];
 let sheepArr = ["lamb"];
 let spiderArr = ["beetle"];
 let basketArr = ["pail"];
-let turtleArr = ["tortoise"];
+let turtleArr = ["tortoise", "tortoises"];
 let squirrelArr =["hare"];
 let lionArr = ["lion's"];
 let catArr = ["tiger", "tiger's", "tigers", "cats"];
@@ -254,7 +256,7 @@ function runjsonCheck(json, checkword){
   // add the sketch to the page
   setTimeout(() => {
     loadASketch(checkword);
-  }, 1000);
+  }, 3000);
 }
 
 
@@ -356,7 +358,8 @@ function addSentence(result, source, sketchIllustration){
 
 function buttonPressed(clicked_id){
 
-  let animalOne = document.getElementById(clicked_id).innerHTML;
+  let animalOne = clicked_id;
+
   //convert to lowercase
   let animalOneLower = animalOne.toLowerCase();
 
@@ -436,8 +439,10 @@ var sketchRnnDrawing = function( drawingOne ) {
     drawingOne.createCanvas(600, 350);
     drawingOne.background(255);
     previous_pen = 'down';
-    drawingOne.loop();
     sketchColor = getRandomColor();
+
+    console.log("init Canvas");
+    drawingOne.loop();
   };
 
   drawingOne.draw = function() {
@@ -445,6 +450,7 @@ var sketchRnnDrawing = function( drawingOne ) {
       // playsound(sketch.dx, sketch.dy);
 
       penStrokes ++;
+      let penOffset = penStrokes % 4;
 
 
       if (sentimentContainer[sentanceNumber] >= 0){
@@ -453,15 +459,24 @@ var sketchRnnDrawing = function( drawingOne ) {
         //for these animals play this synth
         if( (currIllustration == 'lion') || (currIllustration == 'dog')|| (currIllustration == 'bear') ){
           // each 25th pen stroke
-          if (penStrokes % 25 == 0){
+          if ((penStrokes % 25 == 0) && (penOffset != 1)){
+
+            let noteLenngth = noteLength(sketch.dx);
+            if(noteLenngth == undefined){
+              noteLenngth = '6n';
+            }
             let notetoplayMajor = convertDiamToNoteMajor(sketch.dy)/4;
-            console.log(notetoplayMajor,"notetoplayMajor");
-            playNote2( noteLength(sketch.dx), notetoplayMajor);
+            playNote2( noteLenngth, notetoplayMajor);
           }
         } else{
           //play this synth each 12th stroke
-          if (penStrokes % 12 == 0){
-            playNote1( noteLength(sketch.dx), convertDiamToNoteMajor(sketch.dy)*2);
+          if ((penStrokes % 12 == 0)&& (penOffset != 1)){
+
+            let noteLenngth = noteLength(sketch.dx);
+            if(noteLenngth == undefined){
+              noteLenngth = '6n';
+            }
+            playNote1( noteLenngth, convertDiamToNoteMajor(sketch.dy)*2);
           }
         }
       } else {
@@ -470,25 +485,28 @@ var sketchRnnDrawing = function( drawingOne ) {
         //for these animals play this synth
         if( (currIllustration == 'lion') || (currIllustration == 'dog')|| (currIllustration == 'bear') ){
           // each 25th pen stroke
-          if (penStrokes % 25 == 0){
+          if ((penStrokes % 25 == 0) && (penOffset != 1)){
+
+            let noteLenngth = noteLength(sketch.dx);
+            if(noteLenngth == undefined){
+              noteLenngth = '6n';
+            }
+
             let notetoplayMinor = convertDiamToNoteMinor(sketch.dy)/4;
-            console.log(notetoplayMinor,"notetoplayMinor");
-            playNote2( noteLength(sketch.dx), notetoplayMinor);
+            playNote2( noteLenngth, notetoplayMinor);
           }
         } else{
           //play this synth each 12th stroke
-          if (penStrokes % 12 == 0){
-            playNote1( noteLength(sketch.dx), convertDiamToNoteMinor(sketch.dy)*2);
+          if ((penStrokes % 11 == 0) && (penOffset != 1)){
+
+            let noteLenngth = noteLength(sketch.dx);
+            if(noteLenngth == undefined){
+              noteLenngth = '6n';
+            }
+            playNote1( noteLenngth, convertDiamToNoteMinor(sketch.dy)*2);
           }
         }
-
-
       }
-
-
-
-
-
 
       if (previous_pen == 'down') {
         drawingOne.stroke(sketchColor);
@@ -524,7 +542,7 @@ var sketchRnnDrawing = function( drawingOne ) {
 
 function loadASketch(drawing){
   sketchmodel = ml5.SketchRNN(drawing, function() {
-    // console.log("sketchmodelReady");
+    console.log("sketchmodelReadycalback");
     startDrawing();
   });
 
@@ -539,8 +557,8 @@ function loadASketch(drawing){
   document.getElementById("story").appendChild(div);
 
   var drawingCanvas = new p5(sketchRnnDrawing, document.getElementById(`drawing${sentanceNumber}`));
-  if( sentanceNumber != 1){
 
+  if( sentanceNumber != 1){
 
     // let dimThis  = document.getElementById(`paragraph${sentanceNumber-1}`);
     // dimElement(dimThis);
@@ -563,7 +581,7 @@ function playsound(x, y){
 function loadBookSketch(drawing){
 
   sketchbookmodel = ml5.SketchRNN(drawing, function() {
-    // console.log("sketchmodelReady");
+    console.log("sketchmodelReadyBook");
     startDrawingbook();
   });
 
@@ -589,7 +607,7 @@ function startDrawingbook() {
   y = startBookY/2;
 
   sketchbookmodel.reset();
-  sketchbookmodel.generate(gotSketch);
+  sketchbookmodel.generate(gotBookSketch);
   previous_pen = 'down';
   // console.log('startDrawingbook');
 }
@@ -609,34 +627,39 @@ var sketchRnnBook = function( drawingBook ) {
   };
 
   drawingBook.draw = function() {
-    if (sketch) {
+    if (bookSketch) {
       if (previous_pen == 'down') {
         //make music here
         penStrokesopening ++;
 
         if (penStrokesopening % 20 == 0){
-          let noteToPlay = convertDiamToNoteMajor(sketch.dy);
+          let noteToPlay = convertDiamToNoteMajor(bookSketch.dy);
           if(noteToPlay == undefined){
             noteToPlay = 0;
           }
-          playNoteStart( noteLength(sketch.dx), noteToPlay);
+
+          let noteLenngth = noteLength(bookSketch.dx);
+          if(noteLenngth == undefined){
+            noteLenngth = '6n';
+          }
+          playNoteStart( noteLenngth, noteToPlay);
         }
 
         drawingBook.stroke(sketchColor);
         drawingBook.strokeWeight(3);
-        drawingBook.line(x, y, x + sketch.dx/2, y + sketch.dy/2);
+        drawingBook.line(x, y, x + bookSketch.dx/2, y + bookSketch.dy/2);
       }
-      x += sketch.dx/2;
-      y += sketch.dy/2;
-      previous_pen = sketch.pen;
+      x += bookSketch.dx/2;
+      y += bookSketch.dy/2;
+      previous_pen = bookSketch.pen;
 
-      if (sketch.pen !== 'end') {
-        sketch = null;
-        sketchbookmodel.generate(gotSketch);
+      if (bookSketch.pen !== 'end') {
+        bookSketch = null;
+        sketchbookmodel.generate(gotBookSketch);
       } else {
         // console.log("end");
 
-        sketch = null;
+        bookSketch = null;
         // sketchbookmodel = null;
 
         // pic random drawing class
@@ -644,7 +667,7 @@ var sketchRnnBook = function( drawingBook ) {
         let randDrawing = drawingClasses[randomDrawingNumber];
         sketchColor = getRandomColor();
 
-        sketchmodel = ml5.SketchRNN(randDrawing, function() {
+        sketchBookmodel = ml5.SketchRNN(randDrawing, function() {
           // console.log("sketchmodelReady", randDrawing);
           startBookX = Math.floor(Math.random() * (viewportWidth*2 -20) + 20);
           startBookY = Math.floor(Math.random() * (viewportHeight*2 -20)+ 20);
@@ -658,7 +681,9 @@ var sketchRnnBook = function( drawingBook ) {
         //stop looping in draw
         if(startStory){
           drawingBook.noLoop();
-          sketch = null;
+          bookSketch = null;
+
+          sketchBookmodel = null;
 
         }
 
@@ -683,8 +708,16 @@ function startDrawing() {
 
 
 
+
+
+
 function gotSketch(err, s) {
   sketch = s;
+}
+
+
+function gotBookSketch(err, s) {
+  bookSketch = s;
 }
 
 
@@ -754,20 +787,12 @@ function ifInClass(theSentance){
       currIllustration = similaritiesArray[0]
       return currIllustration;
       //add that sketch class to the document
-      //TODO used to load a --->
-      // loadASketch(similaritiesArray[0].toLowerCase());
     }
   }
 }
 
 
-///Utils
-
-
-
-
-
-
+///------> Utils
 
 function enrichSketchClass(theSentance){
 
@@ -1174,7 +1199,7 @@ let synthStart = createSyntStarthWithEffects();
 
 
 function createSyntOnehWithEffects()  {
-  let vol = new Tone.Volume(-30).toMaster();
+  let vol = new Tone.Volume(-20).toMaster();
 
   let reverb = new Tone.Freeverb(0.02).connect(vol);
   reverb.wet.value = 0.02;
@@ -1201,7 +1226,7 @@ function createSyntOnehWithEffects()  {
 
 
 function createSyntTwohWithEffects()  {
-  let vol = new Tone.Volume(-30).toMaster();
+  let vol = new Tone.Volume(-20).toMaster();
 
   let reverb = new Tone.Freeverb(0.02).connect(vol);
   reverb.wet.value = 0.02;
@@ -1243,10 +1268,10 @@ function createSyntStarthWithEffects()  {
       "type": "sine"
     },
     "envelope": {
-      "attack": 0.06,
-      "decay": 0.9,
+      "attack": 0.01,
+      "decay": 0.2,
       "sustain": 0.8,
-      "release": 9.7,
+      "release": 4.7,
     }
   });
   return polySynth.connect(vibrato);
