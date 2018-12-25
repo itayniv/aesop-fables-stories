@@ -1,4 +1,93 @@
-@media screen and (min-width: 300px) {
+@media only screen and (min-width: 300px) {
+
+  .start-button {
+    position: relative;
+    top: 220px;
+    left: 50px;
+    background: #ffffff;
+    z-index:100;
+    width: 70%;
+    margin-top: 20px;
+    line-height: 60px;
+    font-size: 20px;
+    letter-spacing: .03em;
+    font-family: 'Sumana', serif;
+    border: 2px solid #868686;
+
+  }
+  .start-button:hover {
+    position: relative;
+    top: 220px;
+    left: 50px;
+    background: #ffffff;
+    z-index:100;
+    width: 70%;
+    margin-top: 20px;
+    line-height: 60px;
+    font-size: 20px;
+    letter-spacing: .03em;
+    font-family: 'Sumana', serif;
+    border: 2px solid #868686;
+    color: #606060;
+    text-decoration: underline;
+    outline: none;
+  }
+
+  .start-button:focus {
+    position: relative;
+    top: 220px;
+    left: 50px;
+    background: #ffffff;
+    z-index:100;
+    width: 70%;
+    margin-top: 20px;
+    line-height: 60px;
+    font-size: 20px;
+    letter-spacing: .03em;
+    font-family: 'Sumana', serif;
+    border: 2px solid #868686;
+    color: #606060;
+    text-decoration: underline;
+    outline: none;
+  }
+
+
+  .button {
+    border: none;
+    margin-left: 3px;
+    /* width: 30%; */
+    margin-right: 3px;
+    z-index: 100;
+    background-color: #ffffff;
+    border: 1.5px solid #9a9a9a;
+    margin-top: 20px;
+    line-height: 60px;
+    padding: 0 3%;
+  }
+
+  .button:hover {
+    background: #fbfaf2;
+    text-decoration: underline;
+  }
+
+.mobileContainer{
+  padding-right: 50px;
+  padding-left: 50px;
+}
+
+
+
+  .img-thumbnail{
+    border: none;
+    display: block;
+    margin: auto;
+    padding-top: 20px;
+    width: 55px;
+    padding-bottom: 10px;
+    opacity: 0.8;
+    background: none;
+
+  }
 
   .net {
     font-family: 'Roboto', sans-serif;
@@ -267,9 +356,6 @@
     font-size: 20px;
     color: #b5b0b6;
     font-family: 'Sumana', serif;
-
-    /* font-family: 'Short Stack', cursive; */
-
   }
 
   .lightbox {
@@ -327,8 +413,7 @@
 }
 
 
-
-@media screen and (min-width: 1200px) {
+@media only screen and (min-width: 768px) {
 
   .container{
     z-index: 265;
@@ -365,7 +450,10 @@
   }
 
 
-
+  .mobileContainer{
+    padding-right: 0px;
+    padding-left: 0px;
+  }
   .icon-font{
     position: absolute !important;
     /* background-color: red; */
@@ -535,36 +623,36 @@
   }
 
   .button:hover {
-    background: #fff7ac;
+    background: #fbfaf2;
     text-decoration: underline;
   }
 
 
-.button-holder{
-  z-index: 100;
-  font-size: 20px;
-  width:23%;
-  background-color: white;
-  font-family: 'Sumana', serif;
-  border: 1.5px solid #868686;
-}
+  .button-holder{
+    z-index: 100;
+    font-size: 20px;
+    width:23%;
+    background-color: white;
+    font-family: 'Sumana', serif;
+    border: 1.5px solid #868686;
+  }
 
-.illustration-container{
-  border: none !important;
-}
+  .illustration-container{
+    border: none !important;
+  }
 
 
-.img-thumbnail{
-  border: none;
-  display: block;
-  margin: auto;
-  padding-top: 20px;
-  width: 55px;
-  padding-bottom: 10px;
-  opacity: 0.8;
-  background: none;
+  .img-thumbnail{
+    border: none;
+    display: block;
+    margin: auto;
+    padding-top: 20px;
+    width: 55px;
+    padding-bottom: 10px;
+    opacity: 0.8;
+    background: none;
 
-}
+  }
   .buttonContainer{
     position: absolute;
     top: 0%;
@@ -577,45 +665,47 @@
   }
 
 
-.one-more{
-  width: 100%;
-  text-align: center;
-  background: "white";
-  z-index: 100;
-  line-height: 60px;
-  font-size: 25px;
-  letter-spacing: .03em;
-  color: #8a8a8a;
-  font-family: 'Sumana', serif;
-  border: 2px solid #8a8a8a;
-}
+  .one-more{
+    width: 120%;
+    text-align: center;
+    background: "white";
+    z-index: 100;
+    line-height: 60px;
+    font-size: 20px;
+    letter-spacing: .03em;
+    color: #8a8a8a;
+    font-family: 'Sumana', serif;
+    border: 2px solid #8a8a8a;
+  }
 
-.one-more:hover{
-  text-align: center;
-  background: "white";
-  z-index: 100;
-  line-height: 60px;
-  font-size: 25px;
-  letter-spacing: .03em;
-  color: #8a8a8a;
-  font-family: 'Sumana', serif;
-  border: 2px solid #8a8a8a;
-  text-decoration: underline;
-}
+  .one-more:hover{
+    width: 120%;
+    text-align: center;
+    background: "white";
+    z-index: 100;
+    line-height: 60px;
+    font-size: 20px;
+    letter-spacing: .03em;
+    color: #8a8a8a;
+    font-family: 'Sumana', serif;
+    border: 2px solid #8a8a8a;
+    text-decoration: underline;
+  }
 
-.one-more:focus{
-  text-align: center;
-  background: "white";
-  z-index: 100;
-  line-height: 60px;
-  font-size: 25px;
-  letter-spacing: .03em;
-  color: #8a8a8a;
-  font-family: 'Sumana', serif;
-  border: 2px solid #8a8a8a;
-  text-decoration: underline;
-  outline: none;
-}
+  .one-more:focus{
+    width: 120%;
+    text-align: center;
+    background: "white";
+    z-index: 100;
+    line-height: 60px;
+    font-size: 20px;
+    letter-spacing: .03em;
+    color: #8a8a8a;
+    font-family: 'Sumana', serif;
+    border: 2px solid #8a8a8a;
+    text-decoration: underline;
+    outline: none;
+  }
 
 
 
@@ -669,7 +759,6 @@
     color: #606060;
     text-decoration: underline;
     outline: none;
-
   }
 
 

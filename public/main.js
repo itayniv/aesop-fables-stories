@@ -20,7 +20,7 @@ let startingValue = 120;
 let similarSentences = [];
 let similaritiesArray = [];
 let sketchColor;
-let maxSentences = 3;
+let maxSentences = 8;
 let startStory = false;
 let penStrokesopening = 0;
 let viewportWidth;
@@ -56,6 +56,10 @@ let startBookX;
 let startBookY;
 let sketch;
 let bookSketch;
+
+let canvasWidth = 600;
+let canvasHeight = 350;
+let drawingRation = 1.3;
 
 
 
@@ -176,6 +180,18 @@ function init() {
 
   startBookX = viewportWidth/2;
   startBookY = viewportHeight/2;
+
+  if (viewportWidth < 450 ){
+    canvasWidth = 300;
+    canvasHeight = 200;
+
+    startX = canvasWidth/2;
+    startY = canvasHeight/2;
+
+    drawingRation = 2;
+
+
+  }
 
   // console.log(viewportWidth,viewportHeight);
 
@@ -337,6 +353,7 @@ function addSentence(result, source, sketchIllustration){
     div.style.color = "white";
     div.style.opacity = 0;
     div.style.filter = 'alpha(opacity=' + 0 * 0 + ")";
+    div.style.paddingBottom = "150px";
 
     let para = document.createElement("p");
     para.classList.add("voice");
@@ -379,8 +396,9 @@ function addOneMoreButton(){
   btn.appendChild(node);
   document.getElementById("story").appendChild(div).appendChild(btn);
 
-  let fadeinElement = document.getElementById("read-one-more");
-  fadein(fadeinElement);
+  let fadeinElement1 = document.getElementById("read-one-more");
+  fadein(fadeinElement1);
+
 
   setTimeout(() => {
     let elm  = document.getElementById('read-one-more');
@@ -393,9 +411,18 @@ function addOneMoreButton(){
 function resetStory(){
   console.log("Reset Story");
 
+  let fadeOutElement = document.getElementById("a-story-about");
+  fadeOutElement.style.display = "none";
+  fadeOutElement.style.opacity = "0.0";
+
+
   setTimeout(() => {
-    let fadeOutElement = document.getElementById("story");
-    fadeout(fadeOutElement);
+    let fadeOutElement1 = document.getElementById("story");
+    let fadeOutElement2 = document.getElementById("prompt");
+
+    fadeout(fadeOutElement1);
+    fadeout(fadeOutElement2);
+
     // let elm  = document.getElementById('story');
     // elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }, 500);
@@ -403,6 +430,7 @@ function resetStory(){
   setTimeout(() => {
     drawingNumber = 0;
     sentanceNumber = 0;
+
     document.getElementById("story").remove();
 
     var div = document.createElement("div");
@@ -412,12 +440,14 @@ function resetStory(){
 
   setTimeout(() => {
     let fadeoutComponent1 = document.getElementById("characterOne");
+    let fadeinElement2 = document.getElementById("recordedText");
+    let fadeinElement3 = document.getElementById("prompt");
+
+    fadein(fadeinElement2);
     fadein(fadeoutComponent1);
+    fadein(fadeinElement3);
+    fadein(fadeinElement2);
   }, 1400);
-
-
-
-
 
 }
 
@@ -508,7 +538,7 @@ var sketchRnnDrawing = function( drawingOne ) {
   // var y = 100;
 
   drawingOne.setup = function() {
-    drawingOne.createCanvas(600, 350);
+    drawingOne.createCanvas(canvasWidth, canvasHeight);
     drawingOne.background(255);
     previous_pen = 'down';
     sketchColor = getRandomColor();
@@ -582,10 +612,10 @@ var sketchRnnDrawing = function( drawingOne ) {
       if (previous_pen == 'down') {
         drawingOne.stroke(sketchColor);
         drawingOne.strokeWeight(6);
-        drawingOne.line(x, y, x + sketch.dx/1.3, y + sketch.dy/1.3);
+        drawingOne.line(x, y, x + sketch.dx/drawingRation, y + sketch.dy/drawingRation);
       }
-      x += sketch.dx/1.3;
-      y += sketch.dy/1.3;
+      x += sketch.dx/drawingRation;
+      y += sketch.dy/drawingRation;
       previous_pen = sketch.pen;
 
       if (sketch.pen !== 'end') {
