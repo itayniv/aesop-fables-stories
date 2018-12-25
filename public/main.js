@@ -293,7 +293,7 @@ function addSentence(result, source, sketchIllustration){
 
     //check source of the sentence
     if (source == "net"){
-      // console.log("Net");
+
       let para = document.createElement("p");
       para.classList.add("net");
       let node = document.createTextNode(result);
@@ -313,7 +313,6 @@ function addSentence(result, source, sketchIllustration){
       // dimElement(dimThis);
       setTimeout(() => {
         //scroll into the sentence
-        // console.log(`Adding sentence number${sentanceNumber}`);
 
         let elm  = document.getElementById(`paragraph${sentanceNumber}`);
         elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -330,7 +329,7 @@ function addSentence(result, source, sketchIllustration){
       let thisClass = ifInClass(result);
       if (sentanceNumber > 1){
         if (thisClass != undefined){
-          console.log(`add ${thisClass} illustration here`);
+          // console.log(`add ${thisClass} illustration here`);
           loadASketch(thisClass);
         } else {
           //TODO console.log('dont add illustration here');
@@ -370,10 +369,8 @@ function addSentence(result, source, sketchIllustration){
 
     setTimeout(() => {
       addOneMoreButton();
-      console.log("read another Story");
     }, 4000);
   }
-  // console.log('sentanceNumber', sentanceNumber);
 }
 
 
@@ -409,7 +406,6 @@ function addOneMoreButton(){
 
 
 function resetStory(){
-  console.log("Reset Story");
 
   let fadeOutElement = document.getElementById("a-story-about");
   fadeOutElement.style.display = "none";
@@ -622,11 +618,7 @@ var sketchRnnDrawing = function( drawingOne ) {
         sketch = null;
         sketchmodel.generate(gotSketch);
       } else {
-        //when finished --> add another sentence
-        // setTimeout(() => {
-        //   // console.log("add new sentance");
-        //   enhanceStory(sentanceNumber);
-        // }, 7000);
+
         drawingOne.noLoop();
         penStrokes = 0;
         previous_pen = sketch.pen;
@@ -673,9 +665,6 @@ function loadASketch(drawing){
 }
 
 
-function playsound(x, y){
-  // console.log(x,y);
-}
 
 //book animation
 function loadBookSketch(drawing){
