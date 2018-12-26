@@ -1,6 +1,6 @@
 # Let's Read a story!
 
-#### This project is a study on Aesop Fables and the possibility of exploring the connections between them in a new and and fun way using machine learning.
+#### This project is a study on Aesop Fables and the possibility of exploring the connections between them in a new and fun way using machine learning.
 
 [Demo at letsreadastory.itayniv.com](http://letsreadastory.itayniv.com)
 
@@ -20,7 +20,7 @@ Each original Aesop Fable contains:
 
 ### ✨ Cleaning the dataset
 
-For the analysis of the content I compiled a [JSON file](https://github.com/itayniv/aesop-fables-stories/blob/master/public/aesopFables.json) file holding all stories broken down to individual sentences, their titles, characters, and animals.
+For the analysis of the content I compiled a [JSON file](https://github.com/itayniv/aesop-fables-stories/blob/master/public/aesopFables.json) holding all stories broken down to individual sentences, their titles, characters, and animals.
 
 This file is key for generation of new stories, as it holds all sentences and acts as the 'database' for the experiment.
 
