@@ -53,3 +53,10 @@ These illustrations then become musical phrases based on some pre determined rul
 2. According to the animal appearing in the sentence, I choose a different [tone.js](https://tonejs.github.io/) synthesizer and a different number of musical notes. For example, an predatory animal that tends to be scary, like a wolf, will be played by a low-tone synth and a small amount of musical notes sounds. Conversely, a bird will be played by a high-pitched synth and a higher amount of sounds.
 
 This method, of course, does not purport to represent the story reliably, and there are cases in which there will be no match between the musical sounds and the story, but it gives a certain touch to the story and enriches the characters and illustrations in a somewhat charming way. In future versions this method will need to be improved.
+
+### 🔮 Into the future
+
+This is an ongoing projects I intend to work on in the next couple of months, hopefully it will become my thesis project in ITP-NYU. I intend to develop more tools to help structure stronger narratives with the help of these and other machine learning algorithms. Testing and deployment on other platform that give better focus to different aspects of the storytelling practice – actual books, but also smart devices, speakers, tablets and other immersive media devices.
+
+
+[blogpost](https://goo.gl/kFeruk)
