@@ -2,8 +2,9 @@
 
 #### This project is a study on Aesop Fables and the possibility of exploring the connections between them in a new and and fun way using machine learning.
 
-![Aesop Fables for kids](./public/images/astoryaboutabird.gif)
+[Demo at letsreadastory.itayniv.com](http://letsreadastory.itayniv.com)
 
+<kbd>![Aesop Fables for kids](./public/images/astoryaboutabird.gif)</kbd>
 
 ### 📜 Collecting the data.
 
@@ -17,7 +18,7 @@ Each original Aesop Fable contains:
 2. The story itself, usually no more than 30 sentences.
 3. The moral of the story, usually contains a metaphor built on the inherent nature or trait of the animals in the story.     
 
-### 🧹 Cleaning the dataset
+### ✨ Cleaning the dataset
 
 For the analysis of the content I compiled a [JSON file](https://github.com/itayniv/aesop-fables-stories/blob/master/public/aesopFables.json) file holding all stories broken down to individual sentences, their titles, characters, and animals.
 
@@ -39,7 +40,7 @@ Example line from the file:
 For processing and retrieval of information for similarities, averages and distances between sentences I used the [ML5](https://github.com/ml5js/ml5-library/blob/master/src/Word2vec/index.js) Word2Vec class and [changed it a bit](https://github.com/itayniv/aesop-fables-stories/blob/master/sentence2vec.js) to work with the universal sentence encoder scheme.
 
 
-### 🎨 Adding Illustrations & 🎵 Musical phrases to the story
+###  Adding Illustrations  &  Musical phrases to the story  🎨 🎵
 
 To enrich the stories, I'm using [Google Magenta's sketch-RNN model: A Generative Model for Vector Drawings](https://github.com/tensorflow/magenta/tree/master/magenta/models/sketch_rnn)to reconstruct illustrations from a pre trained model to accompany the generated stories.
 
