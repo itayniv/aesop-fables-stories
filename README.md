@@ -2,6 +2,9 @@
 
 #### This project is a study on Aesop Fables and the possibility of exploring the connections between them in a new and and fun way using machine learning.
 
+![Aesop Fables for kids](./images/astoryaboutabird.gif)
+
+
 ### Collecting the data.
 
 For this project I chose to focus and analyze [Aesop Fables](http://www.gutenberg.org/files/49010/49010-0.txt) to produce new and interesting juxtapositions between sentences to create new stories. I was drawn to these stories because of their concise yet rich story lines, the use of animals as metaphors, and the strong morals embedded in each story.
