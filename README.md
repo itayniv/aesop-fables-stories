@@ -2,7 +2,7 @@
 
 #### This project is a study on Aesop Fables and the possibility of exploring the connections between them in a new and and fun way using machine learning.
 
-![Aesop Fables for kids](./images/astoryaboutabird.gif)
+![Aesop Fables for kids](./public/images/astoryaboutabird.gif)
 
 
 ### Collecting the data.
