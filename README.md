@@ -32,22 +32,18 @@ For example:
 {"message": "There was once a little Kid whose growing horns made him think he was a grown-up Billy Goat and able to take care of himself.", "message_embedding": [0.06475523114204407, -0.026618603616952896, -0.05429006740450859, 0.003563014790415764 ...........,0.06475523194004407]}
 
 
-For processing and retrieval of information for similarities, averages and distances between sentences I used the [ML5](https://github.com/ml5js/ml5-library/blob/master/src/Word2vec/index.js) library and changed it a bit to work with the universal sentence encoder scheme.
+For processing and retrieval of information for similarities, averages and distances between sentences I used the [ML5](https://github.com/ml5js/ml5-library/blob/master/src/Word2vec/index.js) Word2Vec class and changed it a bit to work with the universal sentence encoder scheme.
 
 # Adding Illustrations & Musical phrases to the story
 
-To enrich the stories, I'm using the Google Magenta's sketch RNN to generate illustrations to  
+To enrich the stories, I'm using [Google Magenta's sketch-RNN model: A Generative Model for Vector Drawings](https://github.com/tensorflow/magenta/tree/master/magenta/models/sketch_rnn)to reconstruct illustrations from a pre trained model to accompany the generated stories.
 
+Using simple RegEx search, the javascript functionality determines which animal appears in the generated story and draws the illustration from the trained sketch RNN model using [P5](https://p5js.org/). If the sentence contains an animal that does not exist in the model, there is another function that 'enriches' the model's keywords and matches similar animals specified in the sentence.
 
+These illustrations then become musical phrases based on some pre determined rules:
 
+1. With the help of [AFINN-based sentiment analysis library](https://www.npmjs.com/package/sentiment) I analyze each sentence and determine whether it has a positive or negative sentiment. Based on that sentiment (a score between -5 to 5), I'm mapping the illustration's X and Y coodinates to musical notes on a major or minor scale - positive scores get a major scale and negative scores get a minor scale.
 
+2. According to the animal appearing in the sentence, I choose a different [tone.js](https://tonejs.github.io/) synthesizer and a different number of musical notes. For example, an predatory animal that tends to be scary, like a wolf, will be played by a low-tone synth and a small amount of musical notes sounds. Conversely, a bird will be played by a high-pitched synth and a higher amount of sounds.
 
-
-[Quickdraw dataset](https://quickdraw.withgoogle.com/data/jacket)
-
-# Questions
-
-1. How much is too much?
-2. How much is too little?
-3. Platform?
-4. structure?
+This method, of course, does not purport to represent the story reliably, and there are cases in which there will be no match between the musical sounds and the story, but it gives a certain touch to the story and enriches the characters and illustrations in a somewhat charming way. In future versions this method will need to be improved.
