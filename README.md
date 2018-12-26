@@ -1,6 +1,6 @@
 # Let's Read a story!
 
-This project is a study on Aesop Fables and the possibility of exploring the connections between them in a new and and fun way using machine learning.
+#### This project is a study on Aesop Fables and the possibility of exploring the connections between them in a new and and fun way using machine learning.
 
 ### Collecting the data.
 
