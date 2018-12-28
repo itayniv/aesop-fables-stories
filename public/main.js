@@ -396,12 +396,34 @@ function addOneMoreButton(){
   let fadeinElement1 = document.getElementById("read-one-more");
   fadein(fadeinElement1);
 
-
   setTimeout(() => {
     let elm  = document.getElementById('read-one-more');
     elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }, 500);
 
+
+
+  ////TODO blogPost
+  // var temp_link = document.createElement("a");
+  // temp_link.href = "https://medium.com/@itayniv/lets-read-a-story-a-study-on-storytelling-for-children-using-machine-learning-tools-1b631bbbffac";
+  // temp_link.classList.add("blog-post");
+  // temp_link.target = '_blank';
+  // temp_link.innerHTML = "Read the blog post";
+  //
+  // var par = document.createElement("p");
+  // par.id = 'blog-post-id';
+  // par.style.display = "none";
+  // par.style.opacity = "0.0";
+  //
+  // par.innerHTML = "";
+  // par.appendChild(temp_link);
+  //
+  // document.getElementById("story").appendChild(par);
+  //
+  // setTimeout(() => {
+  //   let fadeinElement2 = document.getElementById("blog-post-id");
+  //   fadein(fadeinElement2);
+  // }, 3500);
 }
 
 
@@ -660,8 +682,6 @@ function loadASketch(drawing){
     let elm  = document.getElementById(`drawing${sentanceNumber}`);
     elm.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }, 2000);
-
-
 }
 
 
