@@ -47,15 +47,39 @@ var socket = io.connect('/');
 <body>
 
   <div class="container">
+
+    <!-- <div id="parent_div" style="position:relative;height:100px;width:100px;">
+      <div id="background" style="position:absolute;top:0;left:0;right:0;bottom:0;background-color:red;filter: blur(3px);z-index:-1;"></div>
+      <div id="textarea">My Text</div>
+    </div> -->
+
+
+
+    <div id="startbutton" class="buttonContainer">
+      <div class="col-sm-2"></div>
+      <div id="start-container" style="visibility:hidden" class="col-sm-8" >
+        <div id="start-background" class="start-background" style="background-color: white; opacity: 0.9; filter: blur(.1px);">
+          <p class="start-paragraph">
+            <u>Let’s Read a story</u> is a study on <a href="http://www.gutenberg.org/files/49010/49010-0.txt" target="_blank">Aesop Fables text</a>
+            and the possibility of exploring the connections between different
+            characters and ideas from the original fables in a fun new way using
+            recently available machine learning tools. <br> More about the project <a href="https://towardsdatascience.com/lets-read-a-story-a-study-on-storytelling-for-children-using-machine-learning-tools-1b631bbbffac" target="_blank">here</a>.
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-2"></div>
+      <button id="start-button" class="start-button" style="display: none;" onclick="startbuttonPressed(this.id)">Read a story!</button>
+    </div>
+
+
+
     <div id="book" class="book-div" >
     </div>
     <div class="row" style="padding-bottom: 300px;">
       <div class="col-sm-3">
       </div>
       <div id="story-container" class="col-sm-6">
-        <div id="startbutton" class="buttonContainer">
-          <button id="start-button" class="start-button" style="display: none;" onclick="startbuttonPressed(this.id)">Let's read a story!</button>
-        </div>
+
         <div id="prompt" style="display: none;">
           <p id="recordedText" class="title-text">Let's read a story about...</p>
         </div>
@@ -102,6 +126,8 @@ var socket = io.connect('/');
         <div id="story">
           <p id="recordedText"></p>
         </div>
+
+
         <div class="col-sm-3">
         </div>
       </div>

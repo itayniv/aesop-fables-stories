@@ -203,9 +203,27 @@ function init() {
 }
 
 window.onload = function() {
+
+
+
+  let fadeinElement2 = document.getElementById("start-container");
+  fadeinElement2.style.visibility = "visible";
+
+  //turn bg to 0.9 opaque
+
+  setTimeout(() => {
+    let startBackground = document.getElementById("start-background");
+    startBackground.style.opacity = 0.9;
+  }, 1000);
+
   //fade the sentence into the page.
   let fadeinElement = document.getElementById("start-button");
   fadeinButton(fadeinElement);
+
+  let fadeinElement1 = document.getElementById("start-background");
+  fadeinButton(fadeinElement1);
+
+
 
 };
 
@@ -527,7 +545,10 @@ function startbuttonPressed(clicked_id){
 
   setTimeout(() => {
     let fadeoutComponent = document.getElementById("start-button");
+    let fadeoutComponent1 = document.getElementById("start-background");
+    fadeout(fadeoutComponent1);
     fadeout(fadeoutComponent);
+
 
 
   }, 500);
