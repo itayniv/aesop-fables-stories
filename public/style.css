@@ -1,9 +1,19 @@
 @media only screen and (min-width: 300px) {
 
+
+  .buttonContainer{
+    /* position: absolute; */
+    /* top: 0%; */
+    /* z-index:100; */
+    text-align: center;
+    /* margin-top: -50px; */
+    /* width: 80%; */
+    /* height: 100%; */
+  }
+
   .start-button {
     position: relative;
     top: 15px;
-    left: 50px;
     background: #ffffff;
     z-index:100;
     width: 55%;
@@ -18,7 +28,6 @@
   .start-button:hover {
     position: relative;
     top: 15px;
-    left: 50px;
     background: #ffffff;
     z-index:100;
     width: 55%;
@@ -36,7 +45,6 @@
   .start-button:focus {
     position: relative;
     top: 15px;
-    left: 50px;
     background: #ffffff;
     z-index:100;
     width: 55%;
@@ -64,8 +72,8 @@
   }
 
   .start-paragraph {
+    text-align: center;
     position: relative;
-    /* top: 280px; */
     background: "white";
     z-index: 100;
     margin-top: 20px;
@@ -187,21 +195,21 @@
   /*TYPOGRAPHY*/
   a {
     outline: none;
-    color: #704614;
+    color: #FDD835;
   }
 
   a:active {
-    color: #704614;
+    color: #FDD835;
   }
 
   a:visited {
-    color: #704614;
+    color: #F57F17;
   }
 
 
 
   a:hover {
-    color: #ad6e20;
+    color: #FDD835;
     text-decoration: underline;
 
   }
@@ -527,21 +535,19 @@
   /*TYPOGRAPHY*/
   a {
     outline: none;
-    color: #704614;
+    color: #FDD835;
   }
 
   a:active {
-    color: #704614;
+    color: #FDD835;
   }
 
   a:visited {
-    color: #704614;
+    color: #F57F17;
   }
 
-
-
   a:hover {
-    color: #ad6e20;
+    color: #FDD835;
     text-decoration: underline;
 
   }
@@ -823,7 +829,7 @@
 
   .start-paragraph {
     position: relative;
-    /* top: 280px; */
+    text-align: center;
     background: "white";
     z-index: 100;
     margin-top: 20px;

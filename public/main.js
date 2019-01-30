@@ -59,7 +59,7 @@ let bookSketch;
 
 let canvasWidth = 600;
 let canvasHeight = 350;
-let drawingRation = 1.3;
+let drawingRation = 1.6;
 
 
 
@@ -188,7 +188,7 @@ function init() {
     startX = canvasWidth/2;
     startY = canvasHeight/2;
 
-    drawingRation = 2;
+    drawingRation = 1.6;
 
 
   }
