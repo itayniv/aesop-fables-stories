@@ -20,7 +20,7 @@ let startingValue = 120;
 let similarSentences = [];
 let similaritiesArray = [];
 let sketchColor;
-let maxSentences = 8;
+let maxSentences = 6;
 let startStory = false;
 let penStrokesopening = 0;
 let viewportWidth;
